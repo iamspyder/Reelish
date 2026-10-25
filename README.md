@@ -22,6 +22,8 @@ You recorded the take. Reelish helps you finish it. Generate captions with the A
 
 **136 caption presets. 37 font families. Up to 4K export. One install.**
 
+![The Reelish editor with caption text, preset selection and timeline](docs/product.png)
+
 ## Download
 
 Every desktop release includes the speech model and video tools: **no Python, API key, or separate model setup**.
