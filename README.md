@@ -33,7 +33,7 @@ Every desktop release includes the speech model and video tools: **no Python, AP
 | Windows 10/11, 64-bit | [Windows installer](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-Windows-x64-Setup.exe) |
 | macOS, Apple Silicon — M-series | [Apple Silicon DMG](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-macOS-arm64.dmg) |
 | macOS, Intel | [Intel DMG](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-macOS-x64.dmg) |
-| Linux, 64-bit Intel/AMD | [AppImage](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-Linux-x64.AppImage) · [Debian/Ubuntu package](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-Linux-x64.deb) |
+| Linux, 64-bit Intel/AMD | [AppImage](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-Linux-x86_64.AppImage) · [Debian/Ubuntu package](https://github.com/iamspyder/Reelish/releases/latest/download/Reelish-Linux-amd64.deb) |
 
 [All release files, ZIP builds, checksums and release notes →](https://github.com/iamspyder/Reelish/releases/latest)
 
