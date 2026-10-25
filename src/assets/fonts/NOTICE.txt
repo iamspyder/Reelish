@@ -1,0 +1,23 @@
+Clipora bundled font library
+
+Original fonts are distributed under the license supplied in each family directory.
+The manifest.json file records each official Google Fonts source and license path.
+Luckiest Guy uses the Apache License 2.0; the other included families use SIL OFL 1.1.
+
+The export/ directory contains Clipora-generated static instances of the original
+variable fonts, made with fontTools varLib.instancer. These derivatives retain
+their original copyright and license records and are renamed internally to
+"Clipora Caption NN WEIGHT" to respect Reserved Font Names. The exportFaces
+manifest entries map these derivative names back to the original family.
+Original browser fonts are unmodified. No fonts are installed into Windows.
+
+To refresh the original files: node scripts/download-fonts.cjs
+To regenerate export instances: python scripts/static-fonts.py
+The latter requires fontTools as a build utility, not a runtime dependency.
+Both scripts accept family IDs as arguments for selective builds. Existing family
+order and export names are preserved when adding fonts. Use
+node scripts/index-export-fonts.cjs to reconcile selectively generated export files.
+
+Fredoka One is the original official Google Fonts release from commit
+be2838a23fd2918408e22b25c54135da76525ff6, before its delisting. Its OFL.txt is
+included unchanged alongside FredokaOne-Regular.ttf.

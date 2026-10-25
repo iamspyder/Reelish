@@ -1,0 +1,99 @@
+{
+  "name": "reelish",
+  "version": "1.4.0",
+  "main": "src/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/core.test.cjs tests/caption-engine.test.cjs tests/fonts.test.cjs tests/presets.test.cjs tests/style-scenes.test.cjs tests/motion.test.cjs tests/audio-render.test.cjs tests/speech.test.cjs",
+    "test:desktop": "node tests/offline-desktop.cjs",
+    "dist": "electron-builder --win nsis --x64",
+    "test:media": "node tests/media.cjs",
+    "dist:mac": "electron-builder --mac --publish never",
+    "dist:linux": "electron-builder --linux --x64 --publish never",
+    "prepare:speech": "node scripts/prepare-speech.cjs",
+    "test:release": "node tests/release-audit.cjs"
+  },
+  "keywords": [],
+  "author": "iamspyder",
+  "license": "MIT",
+  "description": "Reelish — free offline captions and video editing",
+  "build": {
+    "appId": "com.iamspyder.reelish",
+    "productName": "Reelish",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json",
+      "LICENSE"
+    ],
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**",
+      "node_modules/ffprobe-static/**"
+    ],
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": true,
+      "icon": "build/icon.ico",
+      "signExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "artifactName": "Reelish-Windows-x64-Setup.${ext}"
+    },
+    "extraResources": [
+      {
+        "from": "speech-assets",
+        "to": "speech",
+        "filter": [
+          "ggml-base.bin",
+          "manifest.json",
+          "*LICENSE",
+          "runtime/Release/*.dll",
+          "runtime/Release/whisper-cli.exe",
+          "runtime/whisper-cli"
+        ]
+      }
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "build/icon.png",
+      "category": "public.app-category.video",
+      "hardenedRuntime": false,
+      "identity": "-",
+      "artifactName": "Reelish-macOS-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "build/icon.png",
+      "category": "AudioVideo",
+      "maintainer": "iamspyder",
+      "artifactName": "Reelish-Linux-${arch}.${ext}"
+    },
+    "publish": null
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0",
+    "ffprobe-static": "^3.1.0"
+  },
+  "homepage": "https://github.com/iamspyder/Reelish",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamspyder/Reelish.git"
+  }
+}

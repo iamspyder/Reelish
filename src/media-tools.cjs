@@ -1,0 +1,6 @@
+const {spawn}=require('node:child_process'),fs=require('node:fs/promises'),path=require('node:path'),os=require('node:os');
+const media=require('./media.cjs');
+const execFileAsync=require('node:util').promisify(require('node:child_process').execFile);
+async function thumbnail(file){const dir=await fs.mkdtemp(path.join(os.tmpdir(),'clipora-thumb-'));try{const out=path.join(dir,'thumb.jpg');await execFileAsync(media.ffmpeg,['-y','-ss','0.2','-i',file,'-frames:v','1','-vf','scale=240:426:force_original_aspect_ratio=increase,crop=240:426','-q:v','4',out],{windowsHide:true,maxBuffer:1024*1024});return 'data:image/jpeg;base64,'+(await fs.readFile(out)).toString('base64');}finally{await fs.rm(dir,{recursive:true,force:true});}}
+function waveform(file){return new Promise((resolve,reject)=>{const child=spawn(media.ffmpeg,['-v','error','-i',file,'-vn','-ac','1','-ar','1000','-t','600','-f','s16le','pipe:1'],{windowsHide:true});const chunks=[];child.stdout.on('data',b=>chunks.push(b));child.stderr.resume();child.on('error',reject);child.on('close',code=>{if(code!==0)return resolve([]);const b=Buffer.concat(chunks),n=Math.floor(b.length/2),peaks=[];for(let i=0;i<256;i++){let max=0;for(let j=Math.floor(i*n/256);j<Math.floor((i+1)*n/256);j++)max=Math.max(max,Math.abs(b.readInt16LE(j*2))/32768);peaks.push(max);}resolve(peaks);});});}
+module.exports={thumbnail,waveform};

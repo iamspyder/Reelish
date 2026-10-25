@@ -1,0 +1,5 @@
+MediaPipe Tasks Vision 0.10.32 and Selfie Segmenter (float16)
+Copyright Google LLC. Licensed under Apache License 2.0 (see LICENSE).
+Runtime: https://www.npmjs.com/package/@mediapipe/tasks-vision/v/0.10.32
+Model: https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite
+These bundled assets run locally; no frames are uploaded and no runtime download is required.

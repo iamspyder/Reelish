@@ -1,0 +1,12 @@
+node_modules/
+dist/
+test-output/
+speech-assets/
+.native-build/
+evidence/
+server/
+.env*
+!.env.example
+*.log
+*.clipora
+*.reelish

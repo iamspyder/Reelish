@@ -1,0 +1,1827 @@
+{
+  "version": 1,
+  "source": "https://github.com/google/fonts",
+  "families": [
+    {
+      "id": "inter",
+      "family": "Inter",
+      "license": "inter/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/inter",
+      "faces": [
+        {
+          "family": "Inter",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "inter/Inter-Italic[opsz,wght].ttf"
+        },
+        {
+          "family": "Inter",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "inter/Inter[opsz,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 01 400",
+          "file": "export/inter-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 01 400",
+          "file": "export/inter-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 01 600",
+          "file": "export/inter-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 01 600",
+          "file": "export/inter-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 01 700",
+          "file": "export/inter-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 01 700",
+          "file": "export/inter-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 01 800",
+          "file": "export/inter-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 01 800",
+          "file": "export/inter-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": true,
+          "family": "Clipora Caption 01 900",
+          "file": "export/inter-900-italic.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 01 900",
+          "file": "export/inter-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "poppins",
+      "family": "Poppins",
+      "license": "poppins/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/poppins",
+      "faces": [
+        {
+          "family": "Poppins",
+          "style": "Black",
+          "weight": 900,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Black.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Black Italic",
+          "weight": 900,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-BlackItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Bold",
+          "weight": 700,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Bold.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Bold Italic",
+          "weight": 700,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-BoldItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "ExtraBold",
+          "weight": 800,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-ExtraBold.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "ExtraBold Italic",
+          "weight": 800,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-ExtraBoldItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "ExtraLight",
+          "weight": 275,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-ExtraLight.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "ExtraLight Italic",
+          "weight": 275,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-ExtraLightItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-Italic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Light",
+          "weight": 300,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Light.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Light Italic",
+          "weight": 300,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-LightItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Medium",
+          "weight": 500,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Medium.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Medium Italic",
+          "weight": 500,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-MediumItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Regular.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "SemiBold",
+          "weight": 600,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-SemiBold.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "SemiBold Italic",
+          "weight": 600,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-SemiBoldItalic.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Thin",
+          "weight": 250,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "poppins/Poppins-Thin.ttf"
+        },
+        {
+          "family": "Poppins",
+          "style": "Thin Italic",
+          "weight": 250,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "poppins/Poppins-ThinItalic.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "montserrat",
+      "family": "Montserrat",
+      "license": "montserrat/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/montserrat",
+      "faces": [
+        {
+          "family": "Montserrat",
+          "style": "Thin Italic",
+          "weight": 100,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "montserrat/Montserrat-Italic[wght].ttf"
+        },
+        {
+          "family": "Montserrat",
+          "style": "Thin",
+          "weight": 100,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "montserrat/Montserrat[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 03 400",
+          "file": "export/montserrat-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 03 400",
+          "file": "export/montserrat-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 03 600",
+          "file": "export/montserrat-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 03 600",
+          "file": "export/montserrat-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 03 700",
+          "file": "export/montserrat-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 03 700",
+          "file": "export/montserrat-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 03 800",
+          "file": "export/montserrat-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 03 800",
+          "file": "export/montserrat-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": true,
+          "family": "Clipora Caption 03 900",
+          "file": "export/montserrat-900-italic.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 03 900",
+          "file": "export/montserrat-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "anton",
+      "family": "Anton",
+      "license": "anton/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/anton",
+      "faces": [
+        {
+          "family": "Anton",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "anton/Anton-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "bebasneue",
+      "family": "Bebas Neue",
+      "license": "bebasneue/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bebasneue",
+      "faces": [
+        {
+          "family": "Bebas Neue",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "bebasneue/BebasNeue-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "rubik",
+      "family": "Rubik",
+      "license": "rubik/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/rubik",
+      "faces": [
+        {
+          "family": "Rubik",
+          "style": "Light Italic",
+          "weight": 300,
+          "weightRange": [
+            300,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "rubik/Rubik-Italic[wght].ttf"
+        },
+        {
+          "family": "Rubik",
+          "style": "Light",
+          "weight": 300,
+          "weightRange": [
+            300,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "rubik/Rubik[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 06 400",
+          "file": "export/rubik-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 06 400",
+          "file": "export/rubik-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 06 600",
+          "file": "export/rubik-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 06 600",
+          "file": "export/rubik-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 06 700",
+          "file": "export/rubik-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 06 700",
+          "file": "export/rubik-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 06 800",
+          "file": "export/rubik-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 06 800",
+          "file": "export/rubik-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": true,
+          "family": "Clipora Caption 06 900",
+          "file": "export/rubik-900-italic.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 06 900",
+          "file": "export/rubik-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "luckiestguy",
+      "family": "Luckiest Guy",
+      "license": "luckiestguy/LICENSE.txt",
+      "source": "https://github.com/google/fonts/tree/main/apache/luckiestguy",
+      "faces": [
+        {
+          "family": "Luckiest Guy",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "luckiestguy/LuckiestGuy-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "instrumentsans",
+      "family": "Instrument Sans",
+      "license": "instrumentsans/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/instrumentsans",
+      "faces": [
+        {
+          "family": "Instrument Sans",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            400,
+            700
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "instrumentsans/InstrumentSans-Italic[wdth,wght].ttf"
+        },
+        {
+          "family": "Instrument Sans",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            400,
+            700
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "instrumentsans/InstrumentSans[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 08 400",
+          "file": "export/instrumentsans-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 08 400",
+          "file": "export/instrumentsans-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 08 600",
+          "file": "export/instrumentsans-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 08 600",
+          "file": "export/instrumentsans-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 08 700",
+          "file": "export/instrumentsans-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 08 700",
+          "file": "export/instrumentsans-700.ttf"
+        }
+      ]
+    },
+    {
+      "id": "instrumentserif",
+      "family": "Instrument Serif",
+      "license": "instrumentserif/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/instrumentserif",
+      "faces": [
+        {
+          "family": "Instrument Serif",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "instrumentserif/InstrumentSerif-Italic.ttf"
+        },
+        {
+          "family": "Instrument Serif",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "instrumentserif/InstrumentSerif-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "playfairdisplay",
+      "family": "Playfair Display",
+      "license": "playfairdisplay/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/playfairdisplay",
+      "faces": [
+        {
+          "family": "Playfair Display",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            400,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "playfairdisplay/PlayfairDisplay-Italic[wght].ttf"
+        },
+        {
+          "family": "Playfair Display",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            400,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "playfairdisplay/PlayfairDisplay[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 10 400",
+          "file": "export/playfairdisplay-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 10 400",
+          "file": "export/playfairdisplay-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 10 600",
+          "file": "export/playfairdisplay-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 10 600",
+          "file": "export/playfairdisplay-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 10 700",
+          "file": "export/playfairdisplay-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 10 700",
+          "file": "export/playfairdisplay-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 10 800",
+          "file": "export/playfairdisplay-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 10 800",
+          "file": "export/playfairdisplay-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": true,
+          "family": "Clipora Caption 10 900",
+          "file": "export/playfairdisplay-900-italic.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 10 900",
+          "file": "export/playfairdisplay-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "caveat",
+      "family": "Caveat",
+      "license": "caveat/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/caveat",
+      "faces": [
+        {
+          "family": "Caveat",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            400,
+            700
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "caveat/Caveat[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 11 400",
+          "file": "export/caveat-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 11 600",
+          "file": "export/caveat-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 11 700",
+          "file": "export/caveat-700.ttf"
+        }
+      ]
+    },
+    {
+      "id": "kaushanscript",
+      "family": "Kaushan Script",
+      "license": "kaushanscript/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/kaushanscript",
+      "faces": [
+        {
+          "family": "Kaushan Script",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "kaushanscript/KaushanScript-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "archivoblack",
+      "family": "Archivo Black",
+      "license": "archivoblack/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/archivoblack",
+      "faces": [
+        {
+          "family": "Archivo Black",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "archivoblack/ArchivoBlack-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "spacemono",
+      "family": "Space Mono",
+      "license": "spacemono/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/spacemono",
+      "faces": [
+        {
+          "family": "Space Mono",
+          "style": "Bold",
+          "weight": 700,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "spacemono/SpaceMono-Bold.ttf"
+        },
+        {
+          "family": "Space Mono",
+          "style": "Bold Italic",
+          "weight": 700,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "spacemono/SpaceMono-BoldItalic.ttf"
+        },
+        {
+          "family": "Space Mono",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "spacemono/SpaceMono-Italic.ttf"
+        },
+        {
+          "family": "Space Mono",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "spacemono/SpaceMono-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "greatvibes",
+      "family": "Great Vibes",
+      "license": "greatvibes/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/greatvibes",
+      "faces": [
+        {
+          "family": "Great Vibes",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "greatvibes/GreatVibes-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "opensans",
+      "family": "Open Sans",
+      "license": "opensans/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/opensans",
+      "faces": [
+        {
+          "family": "Open Sans",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            300,
+            800
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "opensans/OpenSans-Italic[wdth,wght].ttf"
+        },
+        {
+          "family": "Open Sans",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            300,
+            800
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "opensans/OpenSans[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 16 400",
+          "file": "export/opensans-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 16 400",
+          "file": "export/opensans-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 16 600",
+          "file": "export/opensans-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 16 600",
+          "file": "export/opensans-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 16 700",
+          "file": "export/opensans-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 16 700",
+          "file": "export/opensans-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 16 800",
+          "file": "export/opensans-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 16 800",
+          "file": "export/opensans-800.ttf"
+        }
+      ]
+    },
+    {
+      "id": "oswald",
+      "family": "Oswald",
+      "license": "oswald/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/oswald",
+      "faces": [
+        {
+          "family": "Oswald",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            200,
+            700
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "oswald/Oswald[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 17 400",
+          "file": "export/oswald-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 17 600",
+          "file": "export/oswald-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 17 700",
+          "file": "export/oswald-700.ttf"
+        }
+      ]
+    },
+    {
+      "id": "gloock",
+      "family": "Gloock",
+      "license": "gloock/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/gloock",
+      "faces": [
+        {
+          "family": "Gloock",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "gloock/Gloock-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "abrilfatface",
+      "family": "Abril Fatface",
+      "license": "abrilfatface/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/abrilfatface",
+      "faces": [
+        {
+          "family": "Abril Fatface",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "abrilfatface/AbrilFatface-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "bricolagegrotesque",
+      "family": "Bricolage Grotesque",
+      "license": "bricolagegrotesque/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bricolagegrotesque",
+      "faces": [
+        {
+          "family": "Bricolage Grotesque",
+          "style": "96pt ExtraBold",
+          "weight": 800,
+          "weightRange": [
+            200,
+            800
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "bricolagegrotesque/BricolageGrotesque[opsz,wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 20 400",
+          "file": "export/bricolagegrotesque-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 20 600",
+          "file": "export/bricolagegrotesque-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 20 700",
+          "file": "export/bricolagegrotesque-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 20 800",
+          "file": "export/bricolagegrotesque-800.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosansdevanagari",
+      "family": "Noto Sans Devanagari",
+      "license": "notosansdevanagari/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosansdevanagari",
+      "faces": [
+        {
+          "family": "Noto Sans Devanagari",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosansdevanagari/NotoSansDevanagari[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 21 400",
+          "file": "export/notosansdevanagari-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 21 600",
+          "file": "export/notosansdevanagari-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 21 700",
+          "file": "export/notosansdevanagari-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 21 800",
+          "file": "export/notosansdevanagari-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 21 900",
+          "file": "export/notosansdevanagari-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosansbengali",
+      "family": "Noto Sans Bengali",
+      "license": "notosansbengali/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosansbengali",
+      "faces": [
+        {
+          "family": "Noto Sans Bengali",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosansbengali/NotoSansBengali[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 22 400",
+          "file": "export/notosansbengali-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 22 600",
+          "file": "export/notosansbengali-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 22 700",
+          "file": "export/notosansbengali-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 22 800",
+          "file": "export/notosansbengali-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 22 900",
+          "file": "export/notosansbengali-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosanstamil",
+      "family": "Noto Sans Tamil",
+      "license": "notosanstamil/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanstamil",
+      "faces": [
+        {
+          "family": "Noto Sans Tamil",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosanstamil/NotoSansTamil[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 23 400",
+          "file": "export/notosanstamil-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 23 600",
+          "file": "export/notosanstamil-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 23 700",
+          "file": "export/notosanstamil-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 23 800",
+          "file": "export/notosanstamil-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 23 900",
+          "file": "export/notosanstamil-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosanstelugu",
+      "family": "Noto Sans Telugu",
+      "license": "notosanstelugu/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanstelugu",
+      "faces": [
+        {
+          "family": "Noto Sans Telugu",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosanstelugu/NotoSansTelugu[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 24 400",
+          "file": "export/notosanstelugu-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 24 600",
+          "file": "export/notosanstelugu-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 24 700",
+          "file": "export/notosanstelugu-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 24 800",
+          "file": "export/notosanstelugu-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 24 900",
+          "file": "export/notosanstelugu-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosansmalayalam",
+      "family": "Noto Sans Malayalam",
+      "license": "notosansmalayalam/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosansmalayalam",
+      "faces": [
+        {
+          "family": "Noto Sans Malayalam",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosansmalayalam/NotoSansMalayalam[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 25 400",
+          "file": "export/notosansmalayalam-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 25 600",
+          "file": "export/notosansmalayalam-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 25 700",
+          "file": "export/notosansmalayalam-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 25 800",
+          "file": "export/notosansmalayalam-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 25 900",
+          "file": "export/notosansmalayalam-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosanskannada",
+      "family": "Noto Sans Kannada",
+      "license": "notosanskannada/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosanskannada",
+      "faces": [
+        {
+          "family": "Noto Sans Kannada",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosanskannada/NotoSansKannada[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 26 400",
+          "file": "export/notosanskannada-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 26 600",
+          "file": "export/notosanskannada-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 26 700",
+          "file": "export/notosanskannada-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 26 800",
+          "file": "export/notosanskannada-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 26 900",
+          "file": "export/notosanskannada-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosansgujarati",
+      "family": "Noto Sans Gujarati",
+      "license": "notosansgujarati/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosansgujarati",
+      "faces": [
+        {
+          "family": "Noto Sans Gujarati",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosansgujarati/NotoSansGujarati[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 27 400",
+          "file": "export/notosansgujarati-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 27 600",
+          "file": "export/notosansgujarati-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 27 700",
+          "file": "export/notosansgujarati-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 27 800",
+          "file": "export/notosansgujarati-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 27 900",
+          "file": "export/notosansgujarati-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosansgurmukhi",
+      "family": "Noto Sans Gurmukhi",
+      "license": "notosansgurmukhi/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosansgurmukhi",
+      "faces": [
+        {
+          "family": "Noto Sans Gurmukhi",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosansgurmukhi/NotoSansGurmukhi[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 28 400",
+          "file": "export/notosansgurmukhi-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 28 600",
+          "file": "export/notosansgurmukhi-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 28 700",
+          "file": "export/notosansgurmukhi-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 28 800",
+          "file": "export/notosansgurmukhi-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 28 900",
+          "file": "export/notosansgurmukhi-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "notosans",
+      "family": "Noto Sans",
+      "license": "notosans/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/notosans",
+      "faces": [
+        {
+          "family": "Noto Sans",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "notosans/NotoSans-Italic[wdth,wght].ttf"
+        },
+        {
+          "family": "Noto Sans",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "notosans/NotoSans[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 29 400",
+          "file": "export/notosans-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 29 400",
+          "file": "export/notosans-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": true,
+          "family": "Clipora Caption 29 600",
+          "file": "export/notosans-600-italic.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 29 600",
+          "file": "export/notosans-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 29 700",
+          "file": "export/notosans-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 29 700",
+          "file": "export/notosans-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 29 800",
+          "file": "export/notosans-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 29 800",
+          "file": "export/notosans-800.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": true,
+          "family": "Clipora Caption 29 900",
+          "file": "export/notosans-900-italic.ttf"
+        },
+        {
+          "weight": 900,
+          "italic": false,
+          "family": "Clipora Caption 29 900",
+          "file": "export/notosans-900.ttf"
+        }
+      ]
+    },
+    {
+      "id": "gloriahallelujah",
+      "family": "Gloria Hallelujah",
+      "license": "gloriahallelujah/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/gloriahallelujah",
+      "faces": [
+        {
+          "family": "Gloria Hallelujah",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "gloriahallelujah/GloriaHallelujah.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "blackhansans",
+      "family": "Black Han Sans",
+      "license": "blackhansans/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/blackhansans",
+      "faces": [
+        {
+          "family": "Black Han Sans",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "blackhansans/BlackHanSans-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "fredokaone",
+      "family": "Fredoka One",
+      "license": "fredokaone/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/be2838a23fd2918408e22b25c54135da76525ff6/ofl/fredokaone",
+      "faces": [
+        {
+          "family": "Fredoka One",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "fredokaone/FredokaOne-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "dancingscript",
+      "family": "Dancing Script",
+      "license": "dancingscript/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/dancingscript",
+      "faces": [
+        {
+          "family": "Dancing Script",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            400,
+            700
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "dancingscript/DancingScript[wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 33 400",
+          "file": "export/dancingscript-400.ttf"
+        },
+        {
+          "weight": 600,
+          "italic": false,
+          "family": "Clipora Caption 33 600",
+          "file": "export/dancingscript-600.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 33 700",
+          "file": "export/dancingscript-700.ttf"
+        }
+      ]
+    },
+    {
+      "id": "bbhbartle",
+      "family": "BBH Bartle",
+      "license": "bbhbartle/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bbhbartle",
+      "faces": [
+        {
+          "family": "BBH Bartle",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "bbhbartle/BBHBartle-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    },
+    {
+      "id": "roboto",
+      "family": "Roboto",
+      "license": "roboto/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/roboto",
+      "faces": [
+        {
+          "family": "Roboto",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "roboto/Roboto-Italic[wdth,wght].ttf"
+        },
+        {
+          "family": "Roboto",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            100,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "roboto/Roboto[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 35 400",
+          "file": "export/roboto-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 35 400",
+          "file": "export/roboto-400.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 35 700",
+          "file": "export/roboto-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 35 700",
+          "file": "export/roboto-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 35 800",
+          "file": "export/roboto-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 35 800",
+          "file": "export/roboto-800.ttf"
+        }
+      ]
+    },
+    {
+      "id": "monasans",
+      "family": "Mona Sans",
+      "license": "monasans/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/monasans",
+      "faces": [
+        {
+          "family": "Mona Sans",
+          "style": "ExtraLight Italic",
+          "weight": 200,
+          "weightRange": [
+            200,
+            900
+          ],
+          "italic": true,
+          "format": "truetype",
+          "file": "monasans/MonaSans-Italic[wdth,wght].ttf"
+        },
+        {
+          "family": "Mona Sans",
+          "style": "ExtraLight",
+          "weight": 200,
+          "weightRange": [
+            200,
+            900
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "monasans/MonaSans[wdth,wght].ttf"
+        }
+      ],
+      "exportFaces": [
+        {
+          "weight": 400,
+          "italic": true,
+          "family": "Clipora Caption 36 400",
+          "file": "export/monasans-400-italic.ttf"
+        },
+        {
+          "weight": 400,
+          "italic": false,
+          "family": "Clipora Caption 36 400",
+          "file": "export/monasans-400.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": true,
+          "family": "Clipora Caption 36 700",
+          "file": "export/monasans-700-italic.ttf"
+        },
+        {
+          "weight": 700,
+          "italic": false,
+          "family": "Clipora Caption 36 700",
+          "file": "export/monasans-700.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": true,
+          "family": "Clipora Caption 36 800",
+          "file": "export/monasans-800-italic.ttf"
+        },
+        {
+          "weight": 800,
+          "italic": false,
+          "family": "Clipora Caption 36 800",
+          "file": "export/monasans-800.ttf"
+        }
+      ]
+    },
+    {
+      "id": "pressstart2p",
+      "family": "Press Start 2P",
+      "license": "pressstart2p/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/pressstart2p",
+      "faces": [
+        {
+          "family": "Press Start 2P",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "pressstart2p/PressStart2P-Regular.ttf"
+        }
+      ],
+      "exportFaces": []
+    }
+  ]
+}

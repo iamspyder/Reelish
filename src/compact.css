@@ -1,0 +1,8 @@
+/* Keep the populated transcript as compact as the reference editor. */
+.hascaptions #panel-captions>.dual,.hascaptions #panel-captions>p.muted{display:none}
+.hascaptions #panel-captions>.panelheading{margin-bottom:8px}
+.hascaptions .captionlinecontrols{margin:10px 0}
+.hascaptions .captionsettings{padding:10px 12px}
+.hascaptions .captiontoolbar{margin-top:0}
+#panel-captions>#addCue{display:block;width:100%;margin-top:8px;border:1px dashed #303035;background:transparent;color:#96969e}
+.captionsettings #transcribe{margin-top:10px;width:100%}
