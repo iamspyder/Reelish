@@ -1,10 +1,10 @@
 {
   "name": "reelish",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",
-    "test": "node --test tests/core.test.cjs tests/caption-engine.test.cjs tests/fonts.test.cjs tests/presets.test.cjs tests/style-scenes.test.cjs tests/motion.test.cjs tests/audio-render.test.cjs tests/speech.test.cjs",
+    "test": "node --test tests/core.test.cjs tests/caption-engine.test.cjs tests/fonts.test.cjs tests/presets.test.cjs tests/style-scenes.test.cjs tests/motion.test.cjs tests/audio-render.test.cjs tests/speech.test.cjs tests/local-media.test.cjs",
     "test:desktop": "node tests/offline-desktop.cjs",
     "dist": "electron-builder --win nsis --x64",
     "test:media": "node tests/media.cjs",

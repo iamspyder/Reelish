@@ -1,3 +1,4 @@
+const localMedia=require('./local-media.cjs');
 const speech=require('./speech.cjs');
 const {app,BrowserWindow,ipcMain,dialog,protocol,net,shell,safeStorage}=require('electron');
 const fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url');
@@ -22,7 +23,7 @@ handle('effect-create',async id=>{if(!Object.hasOwn(audio.effects,id))throw Erro
 function handle(name,fn){ipcMain.handle(name,async(event,...args)=>{if(event.sender!==win.webContents)throw Error('Invalid sender');return fn(...args);});}
 async function job(fn){if(busy)throw Error('Another operation is running');busy=true;try{return await fn();}finally{busy=false;}}
 const progress=data=>win?.webContents.send('progress',data);
-app.whenReady().then(async()=>{protocol.handle('clipora-media',async request=>{const file=new URL(request.url).searchParams.get('path');if(!allowed.has(file))return new Response('Forbidden',{status:403});const response=await net.fetch(pathToFileURL(file).href,{headers:request.headers});const headers=new Headers(response.headers);headers.set('Access-Control-Allow-Origin','*');return new Response(response.body,{status:response.status,statusText:response.statusText,headers});});
+app.whenReady().then(async()=>{protocol.handle('clipora-media',request=>localMedia.serve(request,allowed));
 win=new BrowserWindow({width:1500,height:960,minWidth:1100,minHeight:720,backgroundColor:'#0b0d12',title:'Reelish',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,autoplayPolicy:'no-user-gesture-required'}});win.on('closed',()=>{speech.cancel();frames.cancel();media.cancel();app.quit();});win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',e=>e.preventDefault());await win.loadFile(path.join(__dirname,'index.html'));if(process.env.CLIPORA_TEST)win.webContents.openDevTools({mode:'detach'});
 });
 handle('import-media',async(kind='video')=>{const r=await dialog.showOpenDialog(win,{properties:['openFile',...(kind==='video'?['multiSelections']:[])],filters:[{name:kind==='audio'?'Audio':'Video',extensions:kind==='audio'?['mp3','wav','m4a','ogg','flac']:['mp4','mov','webm','mkv','avi','m4v']}]});if(r.canceled)return [];const items=[];for(const file of r.filePaths){allowed.add(file);const info=await media.probe(file);if(kind==='video'&&!info.width)throw Error('Selected file has no video stream');items.push(info);}return items;});
