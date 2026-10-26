@@ -10,6 +10,10 @@ Run `node scripts/configure-caption-service.cjs https://YOUR-WORKER.workers.dev`
 
 The desktop extracts only audio from the trimmed clips, concatenates it into a mono 16 kHz FLAC file and uploads it. Video frames, graphics, music and provider credentials are not included in that request. The response preserves word timestamps for captions. Local exports still use the desktop renderer.
 
+### Multilingual and Hinglish
+
+The app offers auto detection and 28 explicit spoken-language choices. Native mode uses Whisper Large V3 Turbo. Hinglish selects Hindi-English speech, uses Whisper Large V3, then romanizes Devanagari words with `llama-3.3-70b-versatile` through the same server-held Groq key. It is transliteration, not English translation: “आज हम video बनाएंगे” becomes “Aaj hum video banayenge”. Existing English words and all word timestamps remain unchanged. Conversion is validated in bounded batches; malformed output or quota exhaustion produces an error rather than silently returning another script. Both speech and text-model quotas apply. Model accuracy and natural spelling still require review; live Hindi-English quality has not been evaluated without an activated service.
+
 The worker limits requests by IP, bounds uploads to 24 MB, pins the upstream provider and model, and returns caption data only. Audio is forwarded to Groq and is not stored by this worker. Provider data handling still applies. Rate limits are approximate per Cloudflare location, not a hard global spending cap. Keep the provider account on its free plan if paid usage is not wanted. Public endpoints can consume the shared free quota; add account-based quotas before a broad commercial launch.
 
 No service has been deployed or account created by preparing these files. Contract tests use an in-process fake provider and actual FFmpeg audio extraction. They do not establish live Groq availability, production quotas, or Cloudflare runtime performance.

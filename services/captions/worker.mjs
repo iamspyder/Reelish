@@ -1,3 +1,4 @@
+import {romanizeHinglish} from './hinglish.mjs';
 const MAX_BYTES=24*1024*1024;
 const json=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'no-store',...headers}});
 export async function handle(request,env,upstream=fetch){
@@ -15,14 +16,19 @@ export async function handle(request,env,upstream=fetch){
  const reader=request.body?.getReader();if(!reader)return json({error:'Missing audio'},400);let size=0;const chunks=[];
  try{while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>MAX_BYTES){await reader.cancel();return json({error:'Audio upload is too large'},413);}chunks.push(value);}}catch{return json({error:'Audio upload was interrupted'},400);}
  let form;try{form=await new Response(new Blob(chunks),{headers:{'Content-Type':request.headers.get('Content-Type')}}).formData();}catch{return json({error:'Invalid audio upload'},400);}
- const audio=form.get('file'),language=String(form.get('language')||'auto');
+ const audio=form.get('file'),language=String(form.get('language')||'auto'),outputScript=String(form.get('output_script')||'native');
+ if(!['native','hinglish'].includes(outputScript))return json({error:'Invalid caption writing system'},400);
+ if(outputScript==='hinglish'&&!['auto','hi'].includes(language))return json({error:'Hinglish is for Hindi-English speech. Select Hindi or auto detect.'},400);
  if(!audio||typeof audio==='string'||!audio.size||audio.size>MAX_BYTES)return json({error:'Missing or oversized audio'},400);
  if(!['audio/flac','audio/wav','audio/x-wav'].includes(audio.type))return json({error:'Upload WAV or FLAC audio'},415);
  if(!/^(auto|[a-z]{2,3})$/.test(language))return json({error:'Invalid language'},400);
- const body=new FormData();body.set('file',audio,audio.type==='audio/flac'?'speech.flac':'speech.wav');body.set('model','whisper-large-v3-turbo');body.set('response_format','verbose_json');body.append('timestamp_granularities[]','word');body.append('timestamp_granularities[]','segment');if(language!=='auto')body.set('language',language);
+ const body=new FormData();body.set('file',audio,audio.type==='audio/flac'?'speech.flac':'speech.wav');body.set('model',outputScript==='hinglish'?'whisper-large-v3':'whisper-large-v3-turbo');body.set('response_format','verbose_json');body.append('timestamp_granularities[]','word');body.append('timestamp_granularities[]','segment');if(language!=='auto')body.set('language',language);
+ if(outputScript==='hinglish')body.set('prompt','नमस्ते दोस्तों, आज हम इस video में बात करेंगे। यह Hindi और English का mixed conversation है।');
  try{const response=await upstream('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:`Bearer ${env.GROQ_API_KEY}`},body,signal:AbortSignal.timeout(180000)});
  if(!response.ok)return json({error:response.status===429?'The shared free caption quota is busy or exhausted. Please try later.':'The caption provider could not process this audio.'},response.status===429?429:502);
- const result=await response.json();return json({text:result.text||'',language:result.language,words:result.words||[],segments:result.segments||[]});
+ let result=await response.json();
+ if(outputScript==='hinglish')try{result=await romanizeHinglish(result,env.GROQ_API_KEY,upstream);}catch(error){return json({error:error.message},error.status||502);}
+ return json({text:result.text||'',language:result.language,words:result.words||[],segments:result.segments||[],outputScript});
  }catch{return json({error:'The caption provider is temporarily unavailable. Try again.'},502);}
 }
 export default {fetch:handle};

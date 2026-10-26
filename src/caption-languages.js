@@ -1,0 +1,5 @@
+(function(root){
+ const languages=[['auto','Auto detect / mixed speech'],['hi','Hindi / हिन्दी'],['en','English'],['bn','Bengali / বাংলা'],['gu','Gujarati / ગુજરાતી'],['kn','Kannada / ಕನ್ನಡ'],['ml','Malayalam / മലയാളം'],['mr','Marathi / मराठी'],['ne','Nepali / नेपाली'],['pa','Punjabi / ਪੰਜਾਬੀ'],['ta','Tamil / தமிழ்'],['te','Telugu / తెలుగు'],['ur','Urdu / اردو'],['es','Spanish'],['fr','French'],['de','German'],['it','Italian'],['pt','Portuguese'],['ar','Arabic'],['ja','Japanese'],['ko','Korean'],['zh','Chinese'],['ru','Russian'],['id','Indonesian'],['vi','Vietnamese'],['tr','Turkish'],['pl','Polish'],['nl','Dutch'],['sw','Swahili']];
+ const api={languages,normalize(value={}){const language=languages.some(([id])=>id===value.language)?value.language:'auto';const outputScript=value.outputScript==='hinglish'?'hinglish':'native';return {language:outputScript==='hinglish'?'hi':language,outputScript};}};
+ if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.CaptionLanguages=api;
+})(typeof window==='undefined'?globalThis:window);

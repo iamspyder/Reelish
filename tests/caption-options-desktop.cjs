@@ -1,0 +1,9 @@
+const {_electron:electron}=require('playwright'),path=require('node:path'),assert=require('node:assert/strict');
+(async()=>{const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;const exe=process.env.CLIPORA_EXECUTABLE;const app=await electron.launch({executablePath:exe||undefined,args:[...(exe?[]:[path.resolve('.')]),'--clipora-test-data='+path.resolve('test-output/caption-options')],env});try{
+ const page=await app.firstWindow();await page.waitForSelector('#resetLayout');await page.evaluate(()=>{p.clips=[{path:'test-only',in:0,out:2}];});await page.click('#transcribe');
+ assert.ok(await page.locator('#captionLanguage option').count()>20);await page.selectOption('#captionWriting','hinglish');assert.equal(await page.locator('#captionLanguage').inputValue(),'hi');assert.equal(await page.locator('#captionEngine').inputValue(),'online');await page.click('#captionGenerate');
+ const saved=await page.evaluate(()=>clipora.call('settings-get'));assert.equal(saved.outputScript,'hinglish');assert.equal(saved.language,'hi');assert.equal(saved.engine,'online');
+ await page.click('#transcribe');assert.equal(await page.locator('#captionWriting').inputValue(),'hinglish');await page.screenshot({path:path.resolve('test-output/hinglish-options.png')});await page.click('#captionCancel');
+ await page.evaluate(()=>showSettings());assert.equal(await page.locator('#outputScript').inputValue(),'hinglish');await page.selectOption('#outputScript','native');await page.selectOption('#language','ta');await page.click('#settingsSave');assert.equal((await page.evaluate(()=>clipora.call('settings-get'))).language,'ta');
+ console.log('Multilingual and Hinglish selection, online routing and persisted settings passed.');
+ }finally{await app.close();}})().catch(error=>{console.error(error);process.exitCode=1;});

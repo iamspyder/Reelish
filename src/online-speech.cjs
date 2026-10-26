@@ -18,11 +18,11 @@ function fromResponse(data,duration){
  }
  return (Array.isArray(data.segments)?data.segments:[]).slice(0,10000).filter(valid).map(s=>({id:crypto.randomUUID(),start:Math.max(0,s.start),end:Math.min(duration,s.end),text:String(s.text??'').trim().slice(0,10000)})).filter(c=>c.text).sort((a,b)=>a.start-b.start);
 }
-async function upload(audio,language,{url=serviceUrl(),request=fetch,signal}={}){
+async function upload(audio,language,{url=serviceUrl(),request=fetch,signal,outputScript='native'}={}){
  if(!url)throw Error('Online captions have not been activated by the Reelish publisher. A hosted caption service must be deployed first.');
  const base=serviceUrl(url),form=new FormData();
  if(audio.byteLength>24*1024*1024)throw Error('This audio exceeds the online service’s 24 MB limit. Split the project into shorter parts.');
- form.set('file',new Blob([audio],{type:'audio/flac'}),'speech.flac');form.set('language',language||'auto');
+ form.set('file',new Blob([audio],{type:'audio/flac'}),'speech.flac');form.set('language',language||'auto');form.set('output_script',outputScript);
  let response;try{response=await request(base+'/v1/transcribe',{method:'POST',body:form,redirect:'error',signal});}catch(e){if(signal?.aborted)throw Error('Online captions cancelled or timed out');throw Error('Cannot reach the online caption service. Check your connection and try again.');}
  if(Number(response.headers.get('content-length'))>4*1024*1024)throw Error('Caption service returned too much data');
  const reader=response.body?.getReader();if(!reader)throw Error('Caption service returned an empty response');const chunks=[];let size=0;
@@ -47,7 +47,7 @@ async function transcribe(project,settings,notify){
   await fs.writeFile(path.join(tmp,'clips.txt'),list.join('\n'));const file=path.join(tmp,'speech.flac');
   await media.run(media.ffmpeg,['-y','-f','concat','-safe','0','-i',path.join(tmp,'clips.txt'),'-c:a','flac',file]);check();
   active=new AbortController();notify?.({percent:50,message:'Uploading audio to the online caption service…'});
-  const data=await upload(await fs.readFile(file),settings.language,{signal:AbortSignal.any([active.signal,AbortSignal.timeout(240000)])});check();
+  const data=await upload(await fs.readFile(file),settings.language,{outputScript:settings.outputScript||'native',signal:AbortSignal.any([active.signal,AbortSignal.timeout(600000)])});check();
   const cues=fromResponse(data,core.duration(project));notify?.({percent:100,message:`${cues.length} caption lines generated online`});return cues;
  }finally{active=null;await fs.rm(tmp,{recursive:true,force:true});}
 }
