@@ -73,7 +73,7 @@ Export at **720p, 1080p or 4K** in **9:16, 16:9, 1:1 or 4:5** for Reels, Shorts,
 
 ### Your work stays yours
 
-Save editable projects on disk. Autosave recovery and undo/redo help you keep moving. Your source video is preserved, and exports have **no Reelish watermark**.
+Save editable projects on disk. Autosave recovery and undo/redo help you keep moving. Drag the dividers to resize navigation, transcript/tools, styles/settings and the timeline; the preview fits the space left over. Your layout is remembered on this device. Double-click a divider to restore its size, or choose **Reset layout** in the timeline. Keyboard users can focus a divider and use arrow keys (Shift for larger steps). Your source video is preserved, and exports have **no Reelish watermark**.
 
 ## From raw take to ready to post
 
