@@ -1,15 +1,17 @@
 import {romanizeHinglish} from './hinglish.mjs';
+import {handleAi} from './ai.mjs';
 const MAX_BYTES=24*1024*1024;
 const json=(data,status=200,headers={})=>Response.json(data,{status,headers:{'Cache-Control':'no-store',...headers}});
 export async function handle(request,env,upstream=fetch){
  const url=new URL(request.url);
- if(url.pathname==='/health'&&request.method==='GET')return json({service:'Reelish captions',ready:!!env.GROQ_API_KEY});
- if(url.pathname!=='/v1/transcribe')return json({error:'Not found'},404);
+ if(url.pathname==='/health'&&request.method==='GET')return json({service:'Reelish captions',ready:!!env.OPENROUTER_API_KEY,provider:'OpenRouter'});
+ if(!['/v1/transcribe','/v1/ai'].includes(url.pathname))return json({error:'Not found'},404);
  if(request.method!=='POST')return json({error:'Use POST'},405);
- if(!env.GROQ_API_KEY)return json({error:'Caption service has not been activated by the publisher.'},503);
+ if(!env.OPENROUTER_API_KEY)return json({error:'Caption service has not been activated by the publisher.'},503);
  if(!env.CAPTION_LIMITER)return json({error:'Caption service rate limiter is unavailable.'},503);
  const ip=request.headers.get('CF-Connecting-IP')||'unknown';
  if(!(await env.CAPTION_LIMITER.limit({key:ip})).success)return json({error:'Too many caption requests. Try again shortly.'},429,{'Retry-After':'60'});
+ if(url.pathname==='/v1/ai')return handleAi(request,env,upstream);
  if(!request.headers.get('Content-Type')?.startsWith('multipart/form-data'))return json({error:'Expected an audio upload'},415);
  const length=Number(request.headers.get('Content-Length'));if(length>MAX_BYTES)return json({error:'Audio upload is too large'},413);
  // Enforce a real streamed limit as well as Content-Length; no audio is persisted.
@@ -22,14 +24,13 @@ export async function handle(request,env,upstream=fetch){
  if(!audio||typeof audio==='string'||!audio.size||audio.size>MAX_BYTES)return json({error:'Missing or oversized audio'},400);
  if(!['audio/flac','audio/wav','audio/x-wav'].includes(audio.type))return json({error:'Upload WAV or FLAC audio'},415);
  if(!/^(auto|[a-z]{2,3})$/.test(language))return json({error:'Invalid language'},400);
- const body=new FormData();body.set('file',audio,audio.type==='audio/flac'?'speech.flac':'speech.wav');body.set('model',outputScript==='hinglish'?'whisper-large-v3':'whisper-large-v3-turbo');body.set('response_format','verbose_json');body.append('timestamp_granularities[]','word');body.append('timestamp_granularities[]','segment');if(language!=='auto')body.set('language',language);
- if(outputScript==='hinglish')body.set('prompt','नमस्ते दोस्तों, आज हम इस video में बात करेंगे। यह Hindi और English का mixed conversation है।');
- try{const response=await upstream('https://api.groq.com/openai/v1/audio/transcriptions',{method:'POST',headers:{Authorization:`Bearer ${env.GROQ_API_KEY}`},body,signal:AbortSignal.timeout(180000)});
- if(!response.ok)return json({error:response.status===429?'The shared free caption quota is busy or exhausted. Please try later.':'The caption provider could not process this audio.'},response.status===429?429:502);
+ const body=new FormData();body.set('file',audio,audio.type==='audio/flac'?'speech.flac':'speech.wav');body.set('model',env.OPENROUTER_SPEECH_MODEL||'openai/whisper-large-v3');body.set('response_format','verbose_json');body.append('timestamp_granularities[]','word');body.append('timestamp_granularities[]','segment');if(language!=='auto')body.set('language',language);
+
+ try{const response=await upstream('https://openrouter.ai/api/v1/audio/transcriptions',{method:'POST',headers:{Authorization:`Bearer ${env.OPENROUTER_API_KEY}`},body,signal:AbortSignal.timeout(180000)});
+ if(!response.ok)return json({error:response.status===429?'OpenRouter usage limit reached. Try again later.':response.status===402?'The publisher’s OpenRouter account needs credits.':'OpenRouter could not process this audio.'},[402,429].includes(response.status)?response.status:502);
  let result=await response.json();
- if(outputScript==='hinglish')try{result=await romanizeHinglish(result,env.GROQ_API_KEY,upstream);}catch(error){return json({error:error.message},error.status||502);}
+ if(outputScript==='hinglish')try{result=await romanizeHinglish(result,env.OPENROUTER_API_KEY,upstream,env.OPENROUTER_TEXT_MODEL);}catch(error){return json({error:error.message},error.status||502);}
  return json({text:result.text||'',language:result.language,words:result.words||[],segments:result.segments||[],outputScript});
  }catch{return json({error:'The caption provider is temporarily unavailable. Try again.'},502);}
 }
 export default {fetch:handle};
-

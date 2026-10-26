@@ -1,7 +1,7 @@
 /* Editor layout preferences belong to this device, independently of projects. */
 (()=>{
   const main=document.querySelector('main'),key='reelish.layout.v1';
-  const defaults={rail:65,left:275,right:325,timeline:219};
+  const defaults={rail:65,left:275,right:325,timeline:285};
   let sizes={...defaults},pending=false;
   try{const saved=JSON.parse(localStorage.getItem(key));for(const k in sizes)if(Number.isFinite(saved?.[k]))sizes[k]=saved[k];}catch{}
   const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));

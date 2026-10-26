@@ -12,6 +12,8 @@ The included caption engine works offline. An optional publisher-hosted **online
 
 The latest source includes a caption chooser with **28 languages plus automatic detection**, and **Hinglish in Roman letters** for Hindi-English speech. Example: “Aaj hum video banayenge.” Hinglish preserves existing English words and word timing and requires the activated online service. Native-language captions retain their original script.
 
+**Reelish 1.5 source:** OpenRouter now powers the hosted AI integration for timed speech recognition, Hinglish, opening hooks, translation and reviewed edit plans. The editor adds 36 graphics across 12 families, editable timed layers, layer keyframes, adjustment layers, voiceover recording, word-timeline editing, timing shifts and clip mirror/rotation. Graphics use the same renderer in preview and MP4 export. See the [implementation and verification status](docs/REELISH-1.5-STATUS.md). A publisher-hosted service and OpenRouter credential are still required to activate online AI; the public download has not been replaced by these source changes.
+
 [![Download](https://img.shields.io/badge/DOWNLOAD-REELISH-ffb800?style=for-the-badge&labelColor=18181b)](https://github.com/iamspyder/Reelish/releases/latest)
 [![Build](https://github.com/iamspyder/Reelish/actions/workflows/release.yml/badge.svg)](https://github.com/iamspyder/Reelish/actions/workflows/release.yml)
 [![MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)

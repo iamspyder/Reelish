@@ -1,3 +1,4 @@
+const aiService=require('./ai-service.cjs');
 const localMedia=require('./local-media.cjs');
 const speech=require('./speech.cjs');
 const onlineSpeech=require('./online-speech.cjs');
@@ -19,13 +20,14 @@ handle('font-list',async()=>{const imported=fonts.listImportedFonts(importedFont
 handle('font-import',async()=>{const r=await dialog.showOpenDialog(win,{filters:[{name:'Font file',extensions:['ttf','otf']}]});if(r.canceled)return null;const font=fonts.importFont(r.filePaths[0],importedFontDir());allowed.add(font.path);return font;});
 handle('media-thumbnail',async file=>{if(!allowed.has(file))throw Error('Select media first');return mediaTools.thumbnail(file);});
 handle('media-waveform',async file=>{if(!allowed.has(file))throw Error('Select media first');return mediaTools.waveform(file);});
+handle('voiceover-save',async base64=>{const audio=await require('./voiceover.cjs').save(base64,path.join(app.getPath('userData'),'voiceovers'),media);allowed.add(audio.path);return audio;});
 handle('effects-list',async()=>Object.entries(audio.effects).map(([id,effect])=>({id,name:id.replace(/(^|\s)\w/g,s=>s.toUpperCase()),duration:effect.duration})));
 handle('effect-create',async id=>{if(!Object.hasOwn(audio.effects,id))throw Error('Unknown effect');const dir=path.join(app.getPath('userData'),'sound-effects');await fs.mkdir(dir,{recursive:true});const file=path.join(dir,id+'.wav');try{await fs.access(file);}catch{await audio.generateEffect(id,file);}allowed.add(file);return {id:crypto.randomUUID(),name:id,path:file,duration:audio.effects[id].duration,volume:.7,in:0};});
 function handle(name,fn){ipcMain.handle(name,async(event,...args)=>{if(event.sender!==win.webContents)throw Error('Invalid sender');return fn(...args);});}
 async function job(fn){if(busy)throw Error('Another operation is running');busy=true;try{return await fn();}finally{busy=false;}}
 const progress=data=>win?.webContents.send('progress',data);
 app.whenReady().then(async()=>{protocol.handle('clipora-media',request=>localMedia.serve(request,allowed));
-win=new BrowserWindow({width:1500,height:960,minWidth:1100,minHeight:720,backgroundColor:'#0b0d12',title:'Reelish',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,autoplayPolicy:'no-user-gesture-required'}});win.on('closed',()=>{speech.cancel();onlineSpeech.cancel();frames.cancel();media.cancel();app.quit();});win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',e=>e.preventDefault());await win.loadFile(path.join(__dirname,'index.html'));if(process.env.CLIPORA_TEST)win.webContents.openDevTools({mode:'detach'});
+win=new BrowserWindow({width:1500,height:960,minWidth:1100,minHeight:720,backgroundColor:'#0b0d12',title:'Reelish',autoHideMenuBar:true,webPreferences:{preload:path.join(__dirname,'preload.cjs'),contextIsolation:true,nodeIntegration:false,sandbox:true,autoplayPolicy:'no-user-gesture-required'}});win.on('closed',()=>{speech.cancel();onlineSpeech.cancel();aiService.cancel();frames.cancel();media.cancel();app.quit();});win.webContents.setWindowOpenHandler(()=>({action:'deny'}));win.webContents.on('will-navigate',e=>e.preventDefault());await win.loadFile(path.join(__dirname,'index.html'));if(process.env.CLIPORA_TEST)win.webContents.openDevTools({mode:'detach'});
 });
 handle('import-media',async(kind='video')=>{const r=await dialog.showOpenDialog(win,{properties:['openFile',...(kind==='video'?['multiSelections']:[])],filters:[{name:kind==='audio'?'Audio':'Video',extensions:kind==='audio'?['mp3','wav','m4a','ogg','flac']:['mp4','mov','webm','mkv','avi','m4v']}]});if(r.canceled)return [];const items=[];for(const file of r.filePaths){allowed.add(file);const info=await media.probe(file);if(kind==='video'&&!info.width)throw Error('Selected file has no video stream');items.push(info);}return items;});
 handle('save-project',async(p,saveAs)=>{authorize(p);const r=await dialog.showSaveDialog(win,{defaultPath:`${p.name||'Untitled'}.reelish`,filters:[{name:'Reelish project',extensions:['reelish','clipora']}]});if(r.canceled)return null;await fs.writeFile(r.filePath,JSON.stringify(p,null,2));return r.filePath;});
@@ -39,9 +41,10 @@ handle('silences',async(p,mode)=>job(async()=>{authorize(p);return media.silence
 handle('apply-silences',async(p,ranges)=>{authorize(p);return core.removeRanges(p,ranges);});
 handle('trim-clip',async(p,index,start,end)=>{authorize(p);return core.trimClip(p,index,start,end);});
 handle('transcribe',async p=>job(async()=>(async()=>{const s=await settings();return s.engine==='online'?onlineSpeech.transcribe(authorize(p),s,progress):s.engine==='bundled'?speech.transcribe(authorize(p),s,progress):media.transcribe(authorize(p),s,progress);})()));
+handle('ai-task',async(task,p,target)=>job(async()=>aiService.request(task,authorize(p),target)));
 handle('settings-get',async()=>{const s=await settings();return {...s,apiKey:undefined,keyEncrypted:undefined,hasKey:!!s.apiKey,online:onlineSpeech.status()};});
 handle('settings-save',async value=>{const old=await settings();const next={engine:value.engine,...require('./caption-languages.js').normalize(value),hinglish:!!value.hinglish,whisperExe:value.whisperExe||'',whisperModel:value.whisperModel||''};const key=value.clearKey?'':value.apiKey||old.apiKey;if(key){if(!safeStorage.isEncryptionAvailable())throw Error('Windows credential encryption is unavailable');next.keyEncrypted=safeStorage.encryptString(key).toString('base64');}await fs.writeFile(settingsPath(),JSON.stringify(next));return true;});
 handle('choose-engine-file',async kind=>{const r=await dialog.showOpenDialog(win,{filters:[{name:kind==='exe'?'whisper.cpp executable':'Whisper model',extensions:[kind==='exe'?'exe':'bin']}]});return r.canceled?null:r.filePaths[0];});
-handle('cancel',()=>{speech.cancel();onlineSpeech.cancel();frames.cancel();audio.cancel();media.cancel();return true;});
+handle('cancel',()=>{speech.cancel();onlineSpeech.cancel();aiService.cancel();frames.cancel();audio.cancel();media.cancel();return true;});
 handle('reveal',async file=>{if(typeof file==='string')shell.showItemInFolder(file);});
-app.on('window-all-closed',()=>{speech.cancel();onlineSpeech.cancel();media.cancel();app.quit();});
+app.on('window-all-closed',()=>{speech.cancel();onlineSpeech.cancel();aiService.cancel();media.cancel();app.quit();});

@@ -1,4 +1,4 @@
-main{position:relative;grid-template-columns:var(--rail-width,65px) var(--left-width,275px) minmax(260px,1fr) var(--right-width,325px);grid-template-rows:34px minmax(160px,1fr) 44px var(--timeline-height,219px)}
+main{position:relative;grid-template-columns:var(--rail-width,65px) var(--left-width,275px) minmax(260px,1fr) var(--right-width,325px);grid-template-rows:34px minmax(160px,1fr) 44px var(--timeline-height,285px)}
 .left,.inspector,.previewbar,.transport{min-width:0}.previewbar{overflow:hidden}.timeline{min-height:0;overflow:auto}
 .layout-divider{position:absolute;z-index:40;touch-action:none;outline:none;background:transparent}
 .layout-divider.vertical{top:0;width:9px;transform:translateX(-50%);cursor:col-resize}

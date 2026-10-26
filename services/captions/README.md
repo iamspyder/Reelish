@@ -1,22 +1,29 @@
-# Reelish cloud captions
+# Reelish OpenRouter service
 
-This service lets installed copies of Reelish transcribe online without asking end users for API keys or local models. The publisher needs a Cloudflare account and a Groq account. Groq's free tier has shared quotas; this is not unlimited free transcription.
+One hosted service powers online captions, Hinglish, hook suggestions, translation and AI edit plans. Installed copies contain only its public URL. The publisher's **OpenRouter API key stays in server secret storage**.
 
-The publisher first creates [Cloudflare](https://dash.cloudflare.com/sign-up) and [Groq](https://console.groq.com/) accounts. Account registration and acceptance of their terms are done by the publisher. Choose free plans if paid usage is not wanted.
+## Activate
 
-From this directory, sign in with `npx wrangler login`, deploy with `npx wrangler deploy`, then add the provider key through `npx wrangler secret put GROQ_API_KEY`. Enter the key into the CLI prompt, or directly in Cloudflare's Worker Settings > Variables and Secrets. Never put it in chat, desktop source, GitHub, or an installer. Verify `/health` returns `ready: true`.
+1. Sign into your Cloudflare account. If needed, create it at https://dash.cloudflare.com/sign-up and complete registration yourself.
+2. From this directory run `npx wrangler login`, then `npx wrangler deploy`.
+3. Store the key using `npx wrangler secret put OPENROUTER_API_KEY`, or the Worker's Settings → Variables and Secrets page. Enter it directly there, never in chat, GitHub or an installer.
+4. Check `/health`: `ready: true` means the publisher secret is configured. It does not verify credits or model availability.
+5. From the project root, run `node scripts/configure-caption-service.cjs https://YOUR-WORKER.workers.dev`. It verifies the expected health response and writes only the public URL into the app.
+6. Run a real caption job and AI request with the deployed service. Then build the installer. Fresh installs choose online captions when its URL is configured; existing engine preferences remain respected.
 
-Run `node scripts/configure-caption-service.cjs https://YOUR-WORKER.workers.dev` from the project root. This verifies the health endpoint before writing only the public URL into the app. Then build the Windows installer. Fresh installs with this URL configured choose online captions by default. People installing the resulting EXE need only an internet connection for captions. Existing saved engine preferences remain respected. No silent fallback to local speech recognition occurs when online mode fails.
+The default text model is `openrouter/free`. The default speech model is `openai/whisper-large-v3`. The publisher can set `OPENROUTER_TEXT_MODEL` and `OPENROUTER_SPEECH_MODEL` as Worker variables. Speech transcription can require credits; free text models have limits and availability varies. No paid text-model fallback is configured. Usage is shared across installed copies; no unlimited-free claim is made.
 
-The desktop extracts only audio from the trimmed clips, concatenates it into a mono 16 kHz FLAC file and uploads it. Video frames, graphics, music and provider credentials are not included in that request. The response preserves word timestamps for captions. Local exports still use the desktop renderer.
+## Features
 
-### Multilingual and Hinglish
+- `/v1/transcribe`: accepts mono audio, forwards multipart audio to OpenRouter's timed transcription endpoint, requests word and segment timestamps. Native scripts are preserved.
+- Hinglish uses the same speech endpoint and then romanizes Devanagari tokens through OpenRouter. Existing English words and all timestamps stay unchanged. Conversion validates count and token format; it fails explicitly on invalid output.
+- `/v1/ai`: generates three hook suggestions, translates caption lines, or suggests a structured edit. IDs, output size, effect names and zoom bounds are validated. The editor previews results before applying them.
+- Translation keeps each caption's start/end. Translated word timings are estimated inside the line, not claimed as forced alignment.
 
-The app offers auto detection and 28 explicit spoken-language choices. Native mode uses Whisper Large V3 Turbo. Hinglish selects Hindi-English speech, uses Whisper Large V3, then romanizes Devanagari words with `llama-3.3-70b-versatile` through the same server-held Groq key. It is transliteration, not English translation: “आज हम video बनाएंगे” becomes “Aaj hum video banayenge”. Existing English words and all word timestamps remain unchanged. Conversion is validated in bounded batches; malformed output or quota exhaustion produces an error rather than silently returning another script. Both speech and text-model quotas apply. Model accuracy and natural spelling still require review; live Hindi-English quality has not been evaluated without an activated service.
+Audio extraction respects clip trims and ordering. Only audio is uploaded for captions; only caption text, IDs and timing are sent for text tools. The Worker does not persist uploads. OpenRouter/provider data handling applies. Requests have per-IP limits, bounded payloads and upstream timeouts. Rate limits are approximate per Cloudflare location, not a global spending cap. Configure publisher spending controls and account-based quotas before a broad commercial launch.
 
-The worker limits requests by IP, bounds uploads to 24 MB, pins the upstream provider and model, and returns caption data only. Audio is forwarded to Groq and is not stored by this worker. Provider data handling still applies. Rate limits are approximate per Cloudflare location, not a hard global spending cap. Keep the provider account on its free plan if paid usage is not wanted. Public endpoints can consume the shared free quota; add account-based quotas before a broad commercial launch.
+## Validation status
 
-No service has been deployed or account created by preparing these files. Contract tests use an in-process fake provider and actual FFmpeg audio extraction. They do not establish live Groq availability, production quotas, or Cloudflare runtime performance.
+Contract tests use a fake upstream and actual FFmpeg audio extraction. Desktop tests exercise review/apply/undo, timing, layers and actual MP4 export. They do not establish live model quality, credits, production quota availability or Cloudflare runtime performance. No live deployment or publisher secret has been provisioned by committing these files.
 
-Official docs: https://console.groq.com/docs/speech-to-text and https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
-
+Official documentation: [OpenRouter timed transcription](https://openrouter.ai/docs/guides/overview/multimodal/stt), [structured responses](https://openrouter.ai/docs/guides/features/structured-outputs), [usage limits](https://openrouter.ai/docs/api/reference/limits).

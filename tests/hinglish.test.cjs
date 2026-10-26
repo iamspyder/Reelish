@@ -28,9 +28,9 @@ test('Hinglish worker completes both stages using only the server credential',as
  const {handle}=await import('../services/captions/worker.mjs');let count=0;
  const response=await online.upload(Buffer.from('fLaC-demo'),'hi',{url:'https://captions.example',outputScript:'hinglish',request:async(url,options)=>{
   assert.equal(options.body.get('output_script'),'hinglish');
-  return handle(new Request(url,options),{GROQ_API_KEY:'test-only',CAPTION_LIMITER:{limit:async()=>({success:true})}},async(url,options)=>{
+  return handle(new Request(url,options),{OPENROUTER_API_KEY:'test-only',CAPTION_LIMITER:{limit:async()=>({success:true})}},async(url,options)=>{
    count++;assert.equal(options.headers.Authorization,'Bearer test-only');
-   if(url.endsWith('/transcriptions')){assert.equal(options.body.get('model'),'whisper-large-v3');assert.equal(options.body.get('language'),'hi');return Response.json({words:[{word:'नमस्ते',start:.2,end:.8},{word:'friends',start:1,end:1.5}]});}
+   if(url.endsWith('/transcriptions')){assert.equal(options.body.get('model'),'openai/whisper-large-v3');assert.equal(options.body.get('language'),'hi');return Response.json({words:[{word:'नमस्ते',start:.2,end:.8},{word:'friends',start:1,end:1.5}]});}
    return Response.json({choices:[{message:{content:'{"words":["namaste","friends"]}'}}]});
   });
  }});assert.equal(count,2);assert.equal(response.words[0].word,'namaste');assert.equal(response.words[0].start,.2);

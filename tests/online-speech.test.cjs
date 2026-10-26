@@ -14,9 +14,9 @@ test('publisher service forwards audio with a server-only credential',async()=>{
  const {handle}=await import('../services/captions/worker.mjs');let called=false;
  const data=await online.upload(Buffer.from('fLaC-demo'),'en',{url:'https://captions.example',request:async(url,options)=>{
   assert.equal(url,'https://captions.example/v1/transcribe');assert.equal(options.headers,undefined,'no provider key in desktop request');
-  return handle(new Request(url,options),{GROQ_API_KEY:'server-only-test-secret',CAPTION_LIMITER:{limit:async()=>({success:true})}},async(url,options)=>{
-   called=true;assert.equal(url,'https://api.groq.com/openai/v1/audio/transcriptions');assert.equal(options.headers.Authorization,'Bearer server-only-test-secret');
-   assert.equal(options.body.get('model'),'whisper-large-v3-turbo');assert.equal(options.body.get('language'),'en');assert.equal(await options.body.get('file').text(),'fLaC-demo');
+  return handle(new Request(url,options),{OPENROUTER_API_KEY:'server-only-test-secret',CAPTION_LIMITER:{limit:async()=>({success:true})}},async(url,options)=>{
+   called=true;assert.equal(url,'https://openrouter.ai/api/v1/audio/transcriptions');assert.equal(options.headers.Authorization,'Bearer server-only-test-secret');
+   assert.equal(options.body.get('model'),'openai/whisper-large-v3');assert.equal(options.body.get('language'),'en');assert.equal(await options.body.get('file').text(),'fLaC-demo');
    return Response.json({words:[{word:'hello',start:0,end:.5}]});
   });
  }});
@@ -32,7 +32,7 @@ test('worker refuses missing configuration and invalid uploads',async()=>{
  const {handle}=await import('../services/captions/worker.mjs');
  assert.equal((await (await handle(new Request('https://captions.example/health'),{})).json()).ready,false);
  assert.equal((await handle(new Request('https://captions.example/v1/transcribe',{method:'POST'}),{})).status,503);
- const env={GROQ_API_KEY:'test',CAPTION_LIMITER:{limit:async()=>({success:true})}};
+ const env={OPENROUTER_API_KEY:'test',CAPTION_LIMITER:{limit:async()=>({success:true})}};
  assert.equal((await handle(new Request('https://captions.example/v1/transcribe',{method:'POST',body:'bad'}),env)).status,415);
  const form=new FormData();form.set('file',new Blob(['video'],{type:'video/mp4'}),'video.mp4');
  assert.equal((await handle(new Request('https://captions.example/v1/transcribe',{method:'POST',body:form}),env)).status,415);
