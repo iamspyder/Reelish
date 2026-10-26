@@ -8,6 +8,8 @@
 
 No API keys. No caption-minute credits. No audio uploads. No watermark.
 
+The included caption engine works offline. An optional publisher-hosted **online captions** integration is also available in the source; it is **not activated in the current public download**. Online mode uploads audio and uses shared provider quotas. See the [service activation guide](services/captions/README.md) and [observations from Captik's signed-in editor](docs/CAPTIK-EDITOR-FINDINGS.md).
+
 [![Download](https://img.shields.io/badge/DOWNLOAD-REELISH-ffb800?style=for-the-badge&labelColor=18181b)](https://github.com/iamspyder/Reelish/releases/latest)
 [![Build](https://github.com/iamspyder/Reelish/actions/workflows/release.yml/badge.svg)](https://github.com/iamspyder/Reelish/actions/workflows/release.yml)
 [![MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)
