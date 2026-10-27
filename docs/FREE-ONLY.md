@@ -10,3 +10,5 @@ Reelish's publisher has selected free models only. This is enforced in source, n
 - Free model availability and provider quotas apply. A quota failure stays a failure; no paid request is substituted. Free does not mean unlimited.
 
 No provider key belongs in the EXE, source, or Git repository. Runtime secrets remain on the hosted server. Do not publish a private Sites access token as part of the desktop configuration.
+
+The hosted service is deployed **privately**, as the publisher requested on 27 October 2026. A real free Hinglish request passed. The shared desktop installer contains no access token or connected service URL, so hosted text AI is not enabled in distributed copies. This privacy choice does not enable paid speech or a local fallback.

@@ -8,6 +8,8 @@ The shared service supports opening hooks, translation, reviewed edit plans, and
 
 ## Hosting
 
+The current deployment is private at https://reelish-ai-iamspyder.kindhawk66.chatgpt.site, per the publisher's explicit choice. Health, blocked speech, and one real free Hinglish conversion were verified. The desktop service URL remains unconfigured because shared installers cannot anonymously access a private service. No private access token is shipped. The following Cloudflare steps remain an alternative hosting guide.
+
 The Cloudflare Worker can be deployed with `npx wrangler deploy` from this directory. Store `OPENROUTER_API_KEY` in runtime secret storage using `npx wrangler secret put OPENROUTER_API_KEY`. Never put it in source, chat, or the EXE. The included rate limiter is required. Hosted service activation remains separate from source implementation.
 
 Check `/health`: `ready` indicates a configured secret, while `freeOnly: true` and `speechEnabled: false` state the policy. This does not verify provider availability. Configure only a verified public HTTPS origin in `src/caption-service.json`, then rebuild. No private access token belongs in that file.

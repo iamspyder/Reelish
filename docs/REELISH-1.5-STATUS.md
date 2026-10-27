@@ -25,4 +25,4 @@ This is not a 100% equivalent implementation. Captik's observed Text panel repor
 
 ## Live activation
 
-The shared service has not been deployed. It requires the publisher's hosting login and `OPENROUTER_API_KEY` secret. The EXE contains no provider key. Text requests are pinned to `openrouter/free` with zero-price ceilings; paid speech is disabled. See [free-only policy](FREE-ONLY.md). See [activation instructions](../services/captions/README.md). No live paid requests were made during this implementation.
+The service was deployed privately on 27 October 2026 at https://reelish-ai-iamspyder.kindhawk66.chatgpt.site. The publisher explicitly chose to keep it private. A real free OpenRouter Hinglish request converted `आज हम video बनाएंगे` to `aaj hum video banayenge`; speech returned HTTP 403. The provider credential is a runtime secret. The desktop configuration remains unconnected: private access credentials are not included in shared installers. Text requests are pinned to `openrouter/free` with zero-price ceilings; paid speech is disabled. See [free-only policy](FREE-ONLY.md). No paid AI requests were made.
