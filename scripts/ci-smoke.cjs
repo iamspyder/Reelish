@@ -2,3 +2,5 @@ const fs=require('fs'),path=require('path'),{execFileSync}=require('child_proces
 
 execFileSync(process.execPath,['tests/studio-features-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
 if(process.platform==='win32')execFileSync(process.execPath,['tests/ai-connection-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
+
+if(process.platform==='win32')execFileSync(process.execPath,['scripts/test-parity-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});

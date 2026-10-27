@@ -31,6 +31,7 @@
    else if(l.kind==='countdown'){add('strong',String(Math.ceil(l.end-time)),'stat-value');add('small',lines[0]);}
    else if(l.kind==='chapter'){add('small','CHAPTER '+(lines[1]||'01'));add('strong',lines[0]);}
    else if(l.kind==='badge'){add('span','✦');add('strong',lines[0]);}
+   else if(typeof ReelishGraphicFamilies!=='undefined')ReelishGraphicFamilies.render(el,l,progress,add);
    host.append(el);
   }
   return host;

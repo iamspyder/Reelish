@@ -44,7 +44,7 @@ async function mask(source,width,height,options={}) {
       pixels.data[offset+3]=Math.round(255*t*t*(3-2*t));
     }
     context.putImageData(pixels,0,0);alphaCanvas.width=w;alphaCanvas.height=h;
-    const out=alphaCanvas.getContext('2d');out.imageSmoothingEnabled=true;out.imageSmoothingQuality='high';out.drawImage(small,0,0,w,h);
+    const out=alphaCanvas.getContext('2d');out.imageSmoothingEnabled=true;out.imageSmoothingQuality='high';out.filter=`blur(${Math.max(0,Math.min(12,Number(options.feather)||0))}px)`;out.drawImage(small,0,0,w,h);
     return alphaCanvas;
   } finally {result?.close();}
 }

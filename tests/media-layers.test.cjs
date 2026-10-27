@@ -1,0 +1,6 @@
+const test=require('node:test'),assert=require('node:assert/strict'),M=require('../src/media-layers.js');
+const layer={id:'a',kind:'video',path:'video.mp4',start:1,end:4,in:2,duration:10};
+test('media overlays validate source trim and normalize bounds',()=>{assert.equal(M.validate([layer]),true);assert.throws(()=>M.validate([{...layer,in:9}]));assert.throws(()=>M.validate([{...layer,end:1}]));assert.equal(M.normalize({...layer,opacity:8,width:-5}).opacity,1);assert.equal(M.normalize({...layer,width:-5}).width,1);});
+test('media overlays stack by track and obey visibility and exact time boundaries',()=>{assert.deepEqual(M.active([{...layer,track:2},{...layer,id:'b',track:0},{...layer,id:'h',hidden:true}],1).map(x=>x.id),['b','a']);assert.equal(M.active([layer],4).length,0);assert.equal(M.active([layer],.99).length,0);});
+test('media overlay retiming removes empty spans and retains source trim',()=>{const rows=M.retime([layer],t=>t-1);assert.equal(rows[0].start,0);assert.equal(rows[0].in,2);assert.equal(M.retime([layer],()=>0).length,0);});
+test('cuts split overlays at removed interiors and advance source in',()=>{const map=t=>t<2?t:t<3?2:t-1;const rows=M.retime([layer],map,[[0,2],[3,8]]);assert.equal(rows.length,2);assert.deepEqual(rows.map(l=>[l.start,l.end,l.in]),[[1,2,2],[2,3,4]]);assert.notEqual(rows[0].id,rows[1].id);});
