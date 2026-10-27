@@ -4,3 +4,5 @@ execFileSync(process.execPath,['tests/studio-features-desktop.cjs'],{env:{...pro
 if(process.platform==='win32')execFileSync(process.execPath,['tests/ai-connection-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
 
 if(process.platform==='win32')execFileSync(process.execPath,['scripts/test-parity-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
+
+if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-workflow-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});

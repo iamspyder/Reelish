@@ -12,6 +12,8 @@ The included caption engine works offline. An optional publisher-hosted **online
 
 The latest source includes a caption chooser with **28 languages plus automatic detection**, and **Hinglish in Roman letters** for Hindi-English speech. Example: “Aaj hum video banayenge.” Hinglish conversion works on existing captions through the activated free text service, preserving English words and matching word timing. Native-language captions retain their original script.
 
+**Caption workflow fix (1.6.1):** Templates explain missing caption text, retain the chosen style on subtitle import, and respect Selected line / All captions scope. See the [reported issue and verification](docs/CAPTION-WORKFLOW-FIX.md).
+
 **Reelish 1.6 source:** Adds video/image overlay tracks, direct resize/keyframes, speed/reverse/freeze, audio extraction, 112 licensed/original sounds, reviewed automatic sound placement, trim/fades, crop/RGB curves, 44 graphic designs, caption merge/motion controls and timeline zoom/snapping. See [verification and remaining gaps](docs/REELISH-1.6-STATUS.md). It is not a verified 100% Captik replica.
 
 **Personal AI keys (1.5.1 source):** Open **AI tools → AI connection & key** to save your own OpenRouter key securely and use free text AI directly. See the [personal AI guide](docs/PERSONAL-AI.md). The publisher service remains private; paid speech stays disabled.
