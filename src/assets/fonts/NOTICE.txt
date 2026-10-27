@@ -2,7 +2,8 @@ Clipora bundled font library
 
 Original fonts are distributed under the license supplied in each family directory.
 The manifest.json file records each official Google Fonts source and license path.
-Luckiest Guy uses the Apache License 2.0; the other included families use SIL OFL 1.1.
+Luckiest Guy and Special Elite use the Apache License 2.0; the other included
+families use SIL OFL 1.1.
 
 The export/ directory contains Clipora-generated static instances of the original
 variable fonts, made with fontTools varLib.instancer. These derivatives retain
@@ -10,6 +11,14 @@ their original copyright and license records and are renamed internally to
 "Clipora Caption NN WEIGHT" to respect Reserved Font Names. The exportFaces
 manifest entries map these derivative names back to the original family.
 Original browser fonts are unmodified. No fonts are installed into Windows.
+
+The caption-style fidelity update adds original Bagel Fat One, Rubik Spray Paint,
+Mynerve, Pinyon Script, Special Elite, Baloo 2 and Unna releases from the official
+Google Fonts repository. Each family keeps its unchanged upstream license file. These families
+use their own bundled glyphs instead of the previous generic substitutions.
+Baloo 2 retains its original variable weight axis for browser/frame export.
+Commercial or otherwise unbundled reference names use explicit substitutes;
+they are not represented as identical typefaces.
 
 To refresh the original files: node scripts/download-fonts.cjs
 To regenerate export instances: python scripts/static-fonts.py

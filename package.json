@@ -1,6 +1,6 @@
 {
   "name": "reelish",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",

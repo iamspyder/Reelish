@@ -1822,6 +1822,155 @@
         }
       ],
       "exportFaces": []
+    },
+    {
+      "id": "bagelfatone",
+      "family": "Bagel Fat One",
+      "license": "bagelfatone/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/bagelfatone",
+      "faces": [
+        {
+          "family": "Bagel Fat One",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "bagelfatone/BagelFatOne-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "id": "rubikspraypaint",
+      "family": "Rubik Spray Paint",
+      "license": "rubikspraypaint/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/rubikspraypaint",
+      "faces": [
+        {
+          "family": "Rubik Spray Paint",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "rubikspraypaint/RubikSprayPaint-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "id": "mynerve",
+      "family": "Mynerve",
+      "license": "mynerve/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/mynerve",
+      "faces": [
+        {
+          "family": "Mynerve",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "mynerve/Mynerve-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "id": "pinyonscript",
+      "family": "Pinyon Script",
+      "license": "pinyonscript/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/pinyonscript",
+      "faces": [
+        {
+          "family": "Pinyon Script",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "pinyonscript/PinyonScript-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "id": "specialelite",
+      "family": "Special Elite",
+      "license": "specialelite/LICENSE.txt",
+      "source": "https://github.com/google/fonts/tree/main/apache/specialelite",
+      "faces": [
+        {
+          "family": "Special Elite",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "specialelite/SpecialElite-Regular.ttf"
+        }
+      ]
+    },
+    {
+      "id": "baloo2",
+      "family": "Baloo 2",
+      "license": "baloo2/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/baloo2",
+      "faces": [
+        {
+          "family": "Baloo 2",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": [
+            400,
+            800
+          ],
+          "italic": false,
+          "format": "truetype",
+          "file": "baloo2/Baloo2[wght].ttf"
+        }
+      ]
+    },
+    {
+      "id": "unna",
+      "family": "Unna",
+      "license": "unna/OFL.txt",
+      "source": "https://github.com/google/fonts/tree/main/ofl/unna",
+      "faces": [
+        {
+          "family": "Unna",
+          "style": "Bold",
+          "weight": 700,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "unna/Unna-Bold.ttf"
+        },
+        {
+          "family": "Unna",
+          "style": "Bold Italic",
+          "weight": 700,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "unna/Unna-BoldItalic.ttf"
+        },
+        {
+          "family": "Unna",
+          "style": "Italic",
+          "weight": 400,
+          "weightRange": null,
+          "italic": true,
+          "format": "truetype",
+          "file": "unna/Unna-Italic.ttf"
+        },
+        {
+          "family": "Unna",
+          "style": "Regular",
+          "weight": 400,
+          "weightRange": null,
+          "italic": false,
+          "format": "truetype",
+          "file": "unna/Unna-Regular.ttf"
+        }
+      ]
     }
   ]
 }

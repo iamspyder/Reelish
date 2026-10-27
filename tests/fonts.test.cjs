@@ -8,7 +8,7 @@ const fonts = require('../src/fonts.cjs');
 test('bundled font names, faces, and redistribution licenses are valid', () => {
   const manifest = fonts.readManifest();
   assert.ok(manifest.families.length >= 20);
-  for (const expected of ['Noto Sans', 'Gloria Hallelujah', 'Black Han Sans', 'Fredoka One', 'Dancing Script', 'BBH Bartle', 'Roboto', 'Mona Sans', 'Press Start 2P']) {
+  for (const expected of ['Noto Sans', 'Gloria Hallelujah', 'Black Han Sans', 'Fredoka One', 'Dancing Script', 'BBH Bartle', 'Roboto', 'Mona Sans', 'Press Start 2P', 'Bagel Fat One', 'Rubik Spray Paint', 'Mynerve', 'Pinyon Script', 'Special Elite', 'Baloo 2', 'Unna']) {
     assert.ok(manifest.families.some(f => f.family === expected), `${expected} must be bundled, not a system fallback`);
   }
   for (const family of manifest.families) {
@@ -28,6 +28,27 @@ test('bundled font names, faces, and redistribution licenses are valid', () => {
     }
   }
   assert.ok(fonts.fontFaceCss(manifest).includes('font-family:"Instrument Serif"'));
+});
+
+test('caption font metadata resolves to bundled faces and keeps distinct open families', () => {
+  require('../src/templates.js');
+  const { aliasFont, fontFallbacks } = globalThis.CliporaPresets;
+  const known = new Set(fonts.readManifest().families.map(f => f.family));
+  const looks = require('../src/look-presets.json');
+  const references = [];
+  function walk(value) {
+    if (!value || typeof value !== 'object') return;
+    for (const [key, item] of Object.entries(value)) {
+      if ((key === 'font' || key === 'accentFont') && typeof item === 'string') references.push(item);
+      else walk(item);
+    }
+  }
+  walk(looks);
+  for (const value of references) assert.ok(known.has(aliasFont(value)), `Unbundled caption font: ${value}`);
+  const distinct = ['BagelFatOne', 'RubikSprayPaint', 'Mynerve', 'PinyonScript', 'SpecialElite', 'Baloo2', 'Unna'];
+  assert.equal(new Set(distinct.map(aliasFont)).size, distinct.length);
+  for (const family of distinct) assert.ok(!Object.hasOwn(fontFallbacks, family));
+  assert.equal(fontFallbacks.DrukWide, 'Archivo Black', 'restricted fonts use an explicit substitute');
 });
 test('custom fonts import by hash, retain metadata, and prepare for offline export', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'clipora-font-test-'));

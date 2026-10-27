@@ -14,6 +14,8 @@ The latest source includes a caption chooser with **28 languages plus automatic 
 
 **Caption workflow fix (1.6.1):** Templates explain missing caption text, retain the chosen style on subtitle import, and respect Selected line / All captions scope. See the [reported issue and verification](docs/CAPTION-WORKFLOW-FIX.md).
 
+**Caption styles update (1.6.2):** Detailed layouts now retain paired fonts, impact layers, stack sizing and distinct motion. Seven actual open fonts replace generic substitutes, and row fades no longer hide captions. See [changes and verification](docs/CAPTION-STYLES-1.6.2.md).
+
 **Reelish 1.6 source:** Adds video/image overlay tracks, direct resize/keyframes, speed/reverse/freeze, audio extraction, 112 licensed/original sounds, reviewed automatic sound placement, trim/fades, crop/RGB curves, 44 graphic designs, caption merge/motion controls and timeline zoom/snapping. See [verification and remaining gaps](docs/REELISH-1.6-STATUS.md). It is not a verified 100% Captik replica.
 
 **Personal AI keys (1.5.1 source):** Open **AI tools → AI connection & key** to save your own OpenRouter key securely and use free text AI directly. See the [personal AI guide](docs/PERSONAL-AI.md). The publisher service remains private; paid speech stays disabled.
@@ -32,7 +34,7 @@ The latest source includes a caption chooser with **28 languages plus automatic 
 
 You recorded the take. Reelish helps you finish it. Generate captions with the AI included in the app, choose a look, fix any word, shape your edit, and export a clean video. Your media stays on your computer throughout the included offline workflow.
 
-**136 caption presets. 37 font families. Up to 4K export. One install.**
+**136 caption presets. 44 font families. Up to 4K export. One install.**
 
 ![The Reelish editor with caption text, preset selection and timeline](docs/product.png)
 
@@ -61,7 +63,7 @@ Whisper Base multilingual recognition is included. Generate caption lines and wo
 
 ### A look for every story
 
-Explore **136 presets** spanning bold, clean, handwritten, editorial, gradient, glass, spatial and behind-person compositions. Choose from **37 bundled font families** or import your own fonts. Adjust color, size, outline, emphasis, position and animation. Favorite the styles you love and save your signature looks.
+Explore **136 presets** spanning bold, clean, handwritten, editorial, gradient, glass, spatial and behind-person compositions. Choose from **44 bundled font families** or import your own fonts. Adjust color, size, outline, emphasis, position and animation. Favorite the styles you love and save your signature looks.
 
 ### Keep the human in the frame
 

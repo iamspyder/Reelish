@@ -65,3 +65,13 @@
 @font-face{font-family:"Mona Sans";src:url("./monasans/MonaSans-Italic[wdth,wght].ttf") format('truetype');font-style:italic;font-weight:200 900;font-display:swap;}
 @font-face{font-family:"Mona Sans";src:url("./monasans/MonaSans[wdth,wght].ttf") format('truetype');font-style:normal;font-weight:200 900;font-display:swap;}
 @font-face{font-family:"Press Start 2P";src:url("./pressstart2p/PressStart2P-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Bagel Fat One";src:url("./bagelfatone/BagelFatOne-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Rubik Spray Paint";src:url("./rubikspraypaint/RubikSprayPaint-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Mynerve";src:url("./mynerve/Mynerve-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Pinyon Script";src:url("./pinyonscript/PinyonScript-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Special Elite";src:url("./specialelite/SpecialElite-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}
+@font-face{font-family:"Baloo 2";src:url("./baloo2/Baloo2[wght].ttf") format('truetype');font-style:normal;font-weight:400 800;font-display:swap;}
+@font-face{font-family:"Unna";src:url("./unna/Unna-Bold.ttf") format('truetype');font-style:normal;font-weight:700;font-display:swap;}
+@font-face{font-family:"Unna";src:url("./unna/Unna-BoldItalic.ttf") format('truetype');font-style:italic;font-weight:700;font-display:swap;}
+@font-face{font-family:"Unna";src:url("./unna/Unna-Italic.ttf") format('truetype');font-style:italic;font-weight:400;font-display:swap;}
+@font-face{font-family:"Unna";src:url("./unna/Unna-Regular.ttf") format('truetype');font-style:normal;font-weight:400;font-display:swap;}

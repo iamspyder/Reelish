@@ -28,7 +28,7 @@ REA CLI `inspect-evidence-bundle` confirmed 13 retained records and one exact ma
 | Active word color/box/grow/glow/underline | Tested | Existing active box/scale plus independent underline/grow/glow and color overrides; shared paint verified. Original effect shapes and combinations unverified. |
 | Future-word show/dim/hide | Tested | Explicit modes plus future/past opacity and color. Hide preserves text layout. Exact original layout behavior unknown. |
 | Caption opacity, tilt, grouping, position | Tested / Partial | New opacity/tilt shared renderer tested; grouping/position existing. Full original per-control limits and interactions unknown. |
-| Dynamic/behind/songs/property/spatial/static template catalog | Partial | 136 looks and 37 font families; catalog labels do not establish matching motion/layout. Scribble/Archives and every original color variant not individually verified. |
+| Dynamic/behind/songs/property/spatial/static template catalog | Partial | 136 looks and 44 font families. All 106 captured reference IDs present; 71 detailed layouts now retain metadata-specific typography/composition. See the catalog audit and 1.6.2 rendering checks. Exact original motion, Scribble/Archives and every color variant remain individually unverified. |
 | Custom fonts/presets/favorites | Implemented | Existing bundled/custom font import and saved styles/favorites. Every original font weight and glyph coverage not compared. |
 | Word/line timeline and shift timing | Tested | Word dragging/resizing, line drag retimes word metadata, shift-all checks pass. |
 | Timeline snapping and zoom/fit | Tested / Unknown | Reelish zoom/fit/snapping checked in the editor; exact original interaction remains unverified. |

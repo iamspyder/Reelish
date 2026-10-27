@@ -6,3 +6,4 @@ if(process.platform==='win32')execFileSync(process.execPath,['tests/ai-connectio
 if(process.platform==='win32')execFileSync(process.execPath,['scripts/test-parity-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
 
 if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-workflow-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
+if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-layout-export.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
