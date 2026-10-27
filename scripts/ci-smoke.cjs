@@ -7,3 +7,4 @@ if(process.platform==='win32')execFileSync(process.execPath,['scripts/test-parit
 
 if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-workflow-desktop.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
 if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-layout-export.cjs'],{env:{...process.env,CLIPORA_EXECUTABLE:executable},stdio:'inherit'});
+if(process.platform==='win32')execFileSync(process.execPath,['tests/caption-package.cjs'],{stdio:'inherit'});
