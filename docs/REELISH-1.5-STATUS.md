@@ -2,7 +2,7 @@
 
 ## Implemented
 
-- OpenRouter-only hosted AI: timed captions, Hinglish conversion, three opening-hook suggestions, translation and reviewed edit plans. No Groq dependency remains in the active service. Provider credentials stay server-side.
+- OpenRouter-only hosted AI: free text tools, Hinglish conversion of existing captions, three opening-hook suggestions, translation and reviewed edit plans. No Groq dependency remains in the active service. Provider credentials stay server-side.
 - AI plans can apply timed graphics, clip punch-in keyframes and available sound effects. Results require a user click to apply and can be undone. No footage is generated or downloaded by a plan.
 - 36 graphic designs in 12 composition families: titles, quotes, statistics, checklists, calls to action, lower thirds, comparisons, progress, countdowns, chapters, badges and steps.
 - Graphic layers have text, timing, position, scale, rotation, opacity, colour, animation, duplicate/delete, visibility and motion keyframes. They are saved in projects and rendered into MP4 using the shared preview renderer.
@@ -13,7 +13,7 @@
 
 ## Verified
 
-51 unit/integration tests pass. Provider contract tests use simulated responses and verify OpenRouter endpoints, server-only credentials, IDs, timestamps, quota/credit errors, payload limits and invalid AI output. Actual FFmpeg extraction is exercised.
+52 unit/integration tests pass. Provider contract tests use simulated responses and verify OpenRouter endpoints, server-only credentials, IDs, timestamps, quota/credit errors, payload limits and invalid AI output. Paid speech is blocked before extraction/upload; simulated provider tests verify zero-price routing.
 
 Desktop checks run in source and the packaged Windows executable: graphic creation and editing, all 36 compositions, safe literal text rendering, word dragging, timing shifts, adjustment creation, reviewed AI hooks/translation/edit application, undo, saved-project roundtrip and real MP4 export. Decoded video pixels verify graphics are burned into the MP4. Panel resizing remains tested.
 
@@ -25,4 +25,4 @@ This is not a 100% equivalent implementation. Captik's observed Text panel repor
 
 ## Live activation
 
-The shared service has not been deployed. It requires the publisher's hosting login and `OPENROUTER_API_KEY` secret. The EXE contains no provider key. Text requests default to `openrouter/free`; speech transcription may require credits. See [activation instructions](../services/captions/README.md). No live paid requests were made during this implementation.
+The shared service has not been deployed. It requires the publisher's hosting login and `OPENROUTER_API_KEY` secret. The EXE contains no provider key. Text requests are pinned to `openrouter/free` with zero-price ceilings; paid speech is disabled. See [free-only policy](FREE-ONLY.md). See [activation instructions](../services/captions/README.md). No live paid requests were made during this implementation.

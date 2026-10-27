@@ -11,3 +11,6 @@ server/
 *.log
 *.clipora
 *.reelish
+
+# Independently hosted service checkout
+/sites/

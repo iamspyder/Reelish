@@ -24,17 +24,6 @@ test('Hinglish rejects missing, expanded, and untranslated tokens',async()=>{
  for(const words of [[],['aaj','today'],['आज'],['aaj today'],['']])await assert.rejects(romanizeHinglish(result,'test',async()=>Response.json({choices:[{message:{content:JSON.stringify({words})}}]})),/Hinglish conversion/);
  await assert.rejects(romanizeHinglish({segments:[]},'test'),/word timestamps/);
 });
-test('Hinglish worker completes both stages using only the server credential',async()=>{
- const {handle}=await import('../services/captions/worker.mjs');let count=0;
- const response=await online.upload(Buffer.from('fLaC-demo'),'hi',{url:'https://captions.example',outputScript:'hinglish',request:async(url,options)=>{
-  assert.equal(options.body.get('output_script'),'hinglish');
-  return handle(new Request(url,options),{OPENROUTER_API_KEY:'test-only',CAPTION_LIMITER:{limit:async()=>({success:true})}},async(url,options)=>{
-   count++;assert.equal(options.headers.Authorization,'Bearer test-only');
-   if(url.endsWith('/transcriptions')){assert.equal(options.body.get('model'),'openai/whisper-large-v3');assert.equal(options.body.get('language'),'hi');return Response.json({words:[{word:'नमस्ते',start:.2,end:.8},{word:'friends',start:1,end:1.5}]});}
-   return Response.json({choices:[{message:{content:'{"words":["namaste","friends"]}'}}]});
-  });
- }});assert.equal(count,2);assert.equal(response.words[0].word,'namaste');assert.equal(response.words[0].start,.2);
-});
 test('conversion quota failure reports failure instead of returning native script',async()=>{
  const {romanizeHinglish}=await import('../services/captions/hinglish.mjs');await assert.rejects(romanizeHinglish({words:[{word:'आज',start:0,end:1}]},'test',async()=>Response.json({}, {status:429})),/quota/);
 });

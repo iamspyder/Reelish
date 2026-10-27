@@ -16,7 +16,7 @@ test('edit plans cannot reference missing cues or arbitrary effects',async()=>{
 });
 test('OpenRouter activation, credits, rate limits and malformed replies are explicit',async()=>{
  const {completion}=await import('../services/captions/openrouter.mjs');await assert.rejects(completion({},[]),/activated/);
- await assert.rejects(completion(env,[],async()=>Response.json({}, {status:402})),/credits/);
+ await assert.rejects(completion(env,[],async()=>Response.json({}, {status:402})),/Free model access/);
  await assert.rejects(completion(env,[],async()=>Response.json({}, {status:429})),/limit/);
  await assert.rejects(completion(env,[],async()=>Response.json({choices:[]})),/invalid JSON/);
 });
@@ -24,4 +24,23 @@ test('AI endpoint enforces transcript size and uses publisher credential',async(
  const {handle}=await import('../services/captions/worker.mjs');const ready=await (await handle(new Request('https://example.com/health'),env)).json();assert.equal(ready.provider,'OpenRouter');
  const response=await handle(new Request('https://example.com/v1/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task:'translate',captions,targetLanguage:'en'})}),{...env,CAPTION_LIMITER:{limit:async()=>({success:true})}},reply({captions:[{id:'one',text:'Today we will make a video'}]}));assert.equal(response.status,200);
  const large=await handle(new Request('https://example.com/v1/ai',{method:'POST',body:'x'.repeat(300000)}),{...env,CAPTION_LIMITER:{limit:async()=>({success:true})}});assert.equal(large.status,413);
+});
+
+test('free-only routing cannot be overridden by publisher model configuration',async()=>{
+ const {completion}=await import('../services/captions/openrouter.mjs');let calls=0;
+ await completion({...env,OPENROUTER_TEXT_MODEL:'paid-model'},[],async(url,options)=>{
+  calls++;const body=JSON.parse(options.body);assert.equal(body.model,'openrouter/free');assert.deepEqual(body.provider.max_price,{prompt:0,completion:0});assert.equal(body.models,undefined);
+  return Response.json({choices:[{message:{content:'{}'}}]});
+ });assert.equal(calls,1);
+});
+
+test('free Hinglish converts existing caption text without calling speech',async()=>{
+ const {aiTask}=await import('../services/captions/ai.mjs');let calls=0;
+ const result=await aiTask({task:'hinglish',captions},env,async(url,options)=>{
+  calls++;assert.match(url,/chat\/completions$/);const body=JSON.parse(options.body);
+  assert.equal(body.model,'openrouter/free');assert.deepEqual(body.provider.max_price,{prompt:0,completion:0});
+  return Response.json({choices:[{message:{content:JSON.stringify({words:['Aaj','hum','film','banayenge']})}}]});
+ });
+ assert.equal(calls,1);assert.deepEqual(result.captions,[{id:'one',text:'Aaj hum video banayenge',words:['Aaj','hum','video','banayenge']}]);
+ const roman=await aiTask({task:'hinglish',captions:[{id:'a',start:0,end:1,text:'Hello friends'}]},env,()=>{throw Error('No AI call needed');});assert.equal(roman.captions[0].text,'Hello friends');
 });

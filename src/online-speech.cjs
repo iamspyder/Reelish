@@ -7,7 +7,7 @@ function serviceUrl(value=configuration.url){
  if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash||u.pathname!=='/')throw Error('Caption service must be an HTTPS origin without credentials or a path');
  return u.origin;
 }
-function status(){return {configured:!!serviceUrl(),url:serviceUrl()};}
+function status(){return {configured:!!serviceUrl(),url:serviceUrl(),speechEnabled:false,freeOnly:true};}
 function fromResponse(data,duration){
  const valid=(w)=>Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.end>w.start&&w.end>0&&w.start<duration;
  if(Array.isArray(data.words)&&data.words.length){
@@ -31,24 +31,7 @@ async function upload(audio,language,{url=serviceUrl(),request=fetch,signal,outp
  if(!response.ok)throw Error(response.status===429?'The shared online caption quota is busy or exhausted. Try again later.':String(data.error||'Online transcription failed').slice(0,300));
  return data;
 }
-async function transcribe(project,settings,notify){
- core.validate(project);if(!project.clips.length)throw Error('Import a video first');
- if(!serviceUrl())throw Error('Online captions have not been activated by the Reelish publisher. Deploy the caption service before distributing an online build.');
- const media=require('./media.cjs'),token=generation,tmp=await fs.mkdtemp(path.join(os.tmpdir(),'reelish-online-'));
- const check=()=>{if(token!==generation)throw Error('Online captions cancelled');};
- try{
-  const list=[];
-  for(let i=0;i<project.clips.length;i++){
-   check();const clip=project.clips[i],file=path.join(tmp,`clip-${i}.flac`),info=await media.probe(clip.path);check();
-   const input=info.audio?['-ss',String(clip.in),'-t',String(clip.out-clip.in),'-i',clip.path,'-vn']:['-f','lavfi','-i','anullsrc=r=16000:cl=mono','-t',String(clip.out-clip.in)];
-   await media.run(media.ffmpeg,['-y',...input,'-ac','1','-ar','16000','-c:a','flac',file]);check();list.push(`file '${file.replace(/\\/g,'/')}'`);
-   notify?.({percent:Math.round((i+1)/project.clips.length*45),message:'Preparing audio for online captions…'});
-  }
-  await fs.writeFile(path.join(tmp,'clips.txt'),list.join('\n'));const file=path.join(tmp,'speech.flac');
-  await media.run(media.ffmpeg,['-y','-f','concat','-safe','0','-i',path.join(tmp,'clips.txt'),'-c:a','flac',file]);check();
-  active=new AbortController();notify?.({percent:50,message:'Uploading audio to the online caption service…'});
-  const data=await upload(await fs.readFile(file),settings.language,{outputScript:settings.outputScript||'native',signal:AbortSignal.any([active.signal,AbortSignal.timeout(600000)])});check();
-  const cues=fromResponse(data,core.duration(project));notify?.({percent:100,message:`${cues.length} caption lines generated online`});return cues;
- }finally{active=null;await fs.rm(tmp,{recursive:true,force:true});}
+async function transcribe(){
+ throw Error('Online speech transcription is disabled: Reelish uses free models only. Import SRT captions or add captions manually.');
 }
 module.exports={serviceUrl,status,fromResponse,upload,transcribe,cancel(){generation++;active?.abort();}};
