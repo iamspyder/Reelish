@@ -3,9 +3,9 @@
   const cues=project.cues.map(c=>({...c})),next={...project,cues};
   if(scope==='selected'){
    const selected=cues.find(c=>c.id===selectedId);if(!selected)throw Error('Select a caption line first. No caption style was changed.');
-   selected.style=JSON.parse(JSON.stringify(style));return {project:next,count:1,empty:false};
+   selected.style=JSON.parse(JSON.stringify(style));if(project.cues.find(c=>c.id===selectedId)?.style?.captionPacing)selected.style.captionPacing=project.cues.find(c=>c.id===selectedId).style.captionPacing;else if(project.style.captionPacing)selected.style.captionPacing=project.style.captionPacing;return {project:next,count:1,empty:false};
   }
-  next.style=JSON.parse(JSON.stringify(style));for(const c of cues)delete c.style;
+  next.style=JSON.parse(JSON.stringify(style));if(project.style.captionPacing)next.style.captionPacing=project.style.captionPacing;for(const c of cues)delete c.style;
   return {project:next,count:cues.length,empty:cues.length===0};
  }
  function previewTime(cues,time,timedWords){

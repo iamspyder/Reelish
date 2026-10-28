@@ -12,8 +12,31 @@ function timedWords(cue) {
  const total=text.reduce((n,w)=>n+Array.from(w).length,0)||1;let consumed=0;
  return text.map((word,i)=>{const a=consumed;consumed+=Array.from(word).length;return {text:word,start:valid?supplied[i].start:start+(end-start)*a/total,end:valid?supplied[i].end:start+(end-start)*consumed/total};});
 }
+// Group by reading time as well as word count. Fast speech may need a slightly
+// longer phrase; word timestamps stay untouched, and real pauses remain gaps.
+function groupTimedWords(input,options={}){
+ const maxWords=clamp(Math.round(num(options.maxWords,6)),1,24),minDuration=clamp(num(options.minDuration,1.2),0,4),maxDuration=Math.max(minDuration,clamp(num(options.maxDuration,3.5),.3,10)),pauseGap=clamp(num(options.pauseGap,.65),.1,3),hardMax=Math.min(30,Math.max(maxWords,maxWords*2));
+ const words=(input||[]).filter(w=>w&&Number.isFinite(w.start)&&Number.isFinite(w.end)&&w.start>=0&&w.end>w.start&&String(w.text??w.word??'').trim()).map(w=>({...w,text:String(w.text??w.word).trim()})).sort((a,b)=>a.start-b.start);
+ const cues=[];let pending=[];
+ const flush=()=>{if(!pending.length)return;cues.push({start:pending[0].start,end:Math.max(...pending.map(w=>w.end)),text:pending.map(w=>w.text).join(' '),words:pending});pending=[];};
+ for(const word of words){
+  const span=pending.length?pending.at(-1).end-pending[0].start:0;
+  if(pending.length&&(word.start-pending.at(-1).end>pauseGap||pending.length>=hardMax||span>=maxDuration||(pending.length>=maxWords&&span>=minDuration)))flush();
+  pending.push(word);
+  if(/[.!?।]$/u.test(word.text)&&word.end-pending[0].start>=minDuration)flush();
+ }
+ flush();
+ // Avoid a one-word flicker at a phrase's tail when it fits the preceding cue.
+ if(cues.length>1){const last=cues.at(-1),before=cues.at(-2);if(last.end-last.start<minDuration&&last.start-before.end<=pauseGap&&last.end-before.start<=maxDuration&&last.words.length+before.words.length<=hardMax){before.end=last.end;before.text+=' '+last.text;before.words.push(...last.words);cues.pop();}}
+ return cues;
+}
+function regroupCues(cues,options={}){
+ const output=[];let run=[],signature=null;
+ const flush=()=>{if(!run.length)return;const words=run.flatMap(c=>timedWords(c).map((w,i)=>({...c.words?.[i],...w,...(c.emphasisIndices?{emphasis:c.emphasisIndices.includes(i)}:{})}))),style=run[0].style,estimated=run.some(c=>c.timingSource==='ai-estimated');for(const cue of groupTimedWords(words,options))output.push({...cue,...(style?{style:JSON.parse(JSON.stringify(style))}:{}),...(estimated?{timingSource:'ai-estimated',timingNotice:'AI-estimated timing: review and adjust before export.'}:{})});run=[];};
+ for(const cue of [...cues].sort((a,b)=>a.start-b.start)){const next=JSON.stringify(cue.style||null);if(run.length&&next!==signature)flush();signature=next;run.push(cue);}flush();return output;
+}
 function frame(cue,style,time) {
- const s=normalize({...style,...cue.style}),all=timedWords(cue),chunk=s.wordsPerLine*s.lines;
+ const s=normalize({...style,...cue.style}),all=timedWords(cue),capacity=s.wordsPerLine*s.lines,chunk=s.captionPacing==='readable'?Math.max(capacity,Math.min(12,all.length)):capacity;
  const index=all.findIndex(w=>time>=w.start&&time<w.end),last=all.reduce((n,w,i)=>w.start<=time?i:n,0),page=Math.floor((index<0?last:index)/chunk);
  return {style:s,page,visible:time>=cue.start&&time<cue.end,words:all.map((w,i)=>{const emphasis=cue.words?.[i]?.emphasis??cue.emphasisIndices?.includes(i)??true,active=time>=w.start&&time<w.end,past=time>=w.end,inPage=Math.floor(i/chunk)===page,visible=inPage&&time>=cue.start&&time<cue.end&&(s.animation!=='word'||active)&&(s.animation!=='typewriter'||time>=w.start);return {...w,progress:clamp((time-w.start)/(w.end-w.start),0,1),emphasis,text:s.uppercase?w.text.toUpperCase():w.text,active,past,visible,line:Math.floor((i%chunk)/s.wordsPerLine),color:active&&emphasis&&['karaoke','highlight','glow','bounce','pop'].includes(s.animation)?s.highlight:s.color,scale:active&&emphasis&&['pop','bounce','highlight','glow','karaoke'].includes(s.animation)?s.activeScale:1,box:!!s.box||(active&&emphasis&&s.activeBox),glow:active&&emphasis&&s.animation==='glow',opacity:(active?1:clamp(num(s.mutedOpacity,1),0,1))*(s.animation==='fade'?clamp(Math.min((time-cue.start)/.12,(cue.end-time)/.12),0,1):1)};})};
 }
@@ -48,5 +71,5 @@ function makeAss(project,width=1080,height=1920){
  }
  return result;
 }
-const api={normalize,timedWords,frame,makeAss,escapeAss};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.CliporaCaptions=api;
+const api={normalize,timedWords,groupTimedWords,regroupCues,frame,makeAss,escapeAss};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.CliporaCaptions=api;
 })(typeof globalThis!=='undefined'?globalThis:this);

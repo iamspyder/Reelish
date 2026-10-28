@@ -27,3 +27,10 @@ test('Hinglish rejects missing, expanded, and untranslated tokens',async()=>{
 test('conversion quota failure reports failure instead of returning native script',async()=>{
  const {romanizeHinglish}=await import('../services/captions/hinglish.mjs');await assert.rejects(romanizeHinglish({words:[{word:'आज',start:0,end:1}]},'test',async()=>Response.json({}, {status:429})),/quota/);
 });
+test('Hinglish accepts fenced JSON through the shared free-only provider parser',async()=>{
+ const {romanizeHinglish}=await import('../services/captions/hinglish.mjs');
+ const result=await romanizeHinglish({words:[{word:'आज',start:0,end:.8}]},'test',async(url,options)=>{
+  const body=JSON.parse(options.body);assert.equal(body.model,'openrouter/free');assert.deepEqual(body.provider.max_price,{prompt:0,completion:0});
+  return Response.json({choices:[{message:{content:'```json\n{"words":["aaj"]}\n```'}}]});
+ });assert.equal(result.words[0].word,'aaj');assert.equal(result.words[0].end,.8);
+});

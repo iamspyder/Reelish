@@ -14,8 +14,9 @@ const {_electron:electron}=require('playwright'),assert=require('node:assert/str
   await app.evaluate(()=>{globalThis.fetch=async(url,options)=>{
    if(url!=='https://openrouter.ai/api/v1/chat/completions'||options.headers.Authorization!=='Bearer sk-or-v1-desktop-test-not-a-real-key')throw Error('Unexpected destination or credential');
    const body=JSON.parse(options.body);if(body.model!=='openrouter/free'||body.provider.max_price.prompt!==0||body.provider.max_price.completion!==0||options.redirect!=='error')throw Error('Free-only routing failed');
-   return Response.json({choices:[{message:{content:'{"captions":[{"id":"one","text":"नमस्ते दुनिया"}]}'}}]});
+   return Response.json({choices:[{message:{content:body.messages[1]?.content==='Test the free text connection.'?'{"ok":true}':'{"captions":[{"id":"one","text":"नमस्ते दुनिया"}]}'}}]});
   };});
+  await page.click('#aiConnection');await page.click('#aiConnectionTest');await page.waitForFunction(()=>document.getElementById('aiConnectionResult').textContent.includes('Free text AI connected'));assert.equal(await page.inputValue('#openrouterKey'),'');await page.click('#aiConnectionCancel');
   const result=await page.evaluate(async()=>{p.cues=[{id:'one',text:'Hello world',start:0,end:1}];return clipora.call('ai-task','translate',p,'hi');});assert.equal(result.captions[0].text,'नमस्ते दुनिया');
   await page.click('#aiConnection');await page.screenshot({path:path.join(dir,'connection.png')});await page.check('#removeOpenrouterKey');await page.click('#aiConnectionSave');assert.equal((await page.evaluate(()=>clipora.call('ai-settings-get'))).hasKey,false);raw=await fs.readFile(path.join(dir,'user/settings.json'),'utf8');assert.equal(JSON.parse(raw).aiKeyEncrypted,undefined);
   assert.deepEqual(errors,[]);console.log('Desktop key entry, OS encryption, secret redaction, preservation, direct free AI request, blank save and removal passed.');

@@ -13,7 +13,6 @@ async function request(task,project,targetLanguage,connection={},upstream=fetch)
    return await aiTask({task,captions,targetLanguage},{OPENROUTER_API_KEY:connection.key},async(url,options)=>{
     if(url!=='https://openrouter.ai/api/v1/chat/completions')throw Error('Unsupported AI endpoint.');
     const response=await upstream(url,{...options,redirect:'error',signal:AbortSignal.any([active.signal,options.signal].filter(Boolean))});
-    if(response.status===401)throw Error('OpenRouter rejected this API key. Update it in AI connection & key.');
     return response;
    });
   }
@@ -25,4 +24,16 @@ async function request(task,project,targetLanguage,connection={},upstream=fetch)
   if(!response.ok)throw Error(String(data.error||'OpenRouter request failed').slice(0,300));return data;
  }finally{active=null;}
 }
-module.exports={request,cancel(){active?.abort();}};
+async function testConnection(connection={},upstream=fetch){
+ if(connection.mode!=='personal')throw Error('The publisher service is private. Choose My OpenRouter key to test your own connection.');
+ if(!connection.key)throw Error('Enter your OpenRouter key or save one before testing.');
+ if(connection.key.length>220)throw Error('Enter a valid OpenRouter API key.');
+ const {completion}=await import('../services/captions/openrouter.mjs');
+ const result=await completion({OPENROUTER_API_KEY:connection.key},[{role:'system',content:'Reply only with JSON {"ok":true}. This is a connection test.'},{role:'user',content:'Test the free text connection.'}],async(url,options)=>{
+  if(url!=='https://openrouter.ai/api/v1/chat/completions')throw Error('Unsupported AI endpoint.');
+  return upstream(url,{...options,redirect:'error'});
+ },{maxTokens:64});
+ if(result.ok!==true)throw Error('The free model replied, but the connection test response was invalid. Try again.');
+ return {ok:true,freeOnly:true,speechEnabled:false,message:'Free text AI connected. Translation, Hinglish, hooks and edit plans are ready. Check Auto captions for available audio-caption sources.'};
+}
+module.exports={request,testConnection,cancel(){active?.abort();}};

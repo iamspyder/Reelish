@@ -39,7 +39,10 @@ function sceneStyle(id,base={},metadata={}){
 function composition(cue,style,time){
  const engine=root.CliporaCaptions||(typeof require==='function'?require('./caption-engine.js'):null);
  const frame=engine.frame(cue,style,time),shown=frame.words.filter(w=>w.visible);
- let hero=shown.findIndex(w=>w.active);if(hero<0)hero=shown.length-1;
+ let hero=shown.findIndex(w=>w.active);
+ // During a measured speech gap, hold the last spoken word. Jumping to the
+ // final future word caused a distracting flash before the next spoken word.
+ if(hero<0){for(let i=shown.length-1;i>=0;i--)if(shown[i].past){hero=i;break;}if(hero<0&&shown.length)hero=0;}
  return {frame,shown,hero,progress:Math.max(0,Math.min(1,(time-cue.start)/Math.max(.01,cue.end-cue.start)))};
 }
 const limit=(value,min,max)=>Math.max(min,Math.min(max,value));
@@ -71,7 +74,7 @@ function decorateLook(container,cue,style,time,dimensions={}){
  function node(word,isHero,index,options={}){
   const el=doc.createElement('span');el.className=isHero?'scene-hero':'scene-support';el.textContent=word.text;el.dataset.word=String(index);
   const role=options.role||{},font=customFont?s.font:options.font||role.font||(isHero?(s.heroFont||s.font):(s.supportFont||s.font));
-  Object.assign(el.style,{display:'inline-block',position:'relative',fontFamily:alias(font),fontWeight:String(options.weight??role.weight??(isHero?(s.heroWeight||m.accentWeight||s.weight):(s.weight||m.weight||400))),color:options.color||role.color||(isHero?accent:color),fontStyle:isHero&&m.accentItalic?'italic':'normal',fontSize:(options.ratio??(isHero?m.accentScale:1)??1)+'em',letterSpacing:(role.letterSpacingEm??(isHero?m.accentLetterSpacingEm:m.letterSpacingEm)??0)+'em',lineHeight:String(m.lineHeight||1.05),opacity:String(isHero?1:(m.restOpacity??1)),textTransform:role.transform||(isHero&&m.accentUppercase?'uppercase':m.transform||'none'),textShadow:shadow,WebkitTextStroke:(m.stroke?.px||0)*referenceUnit+'px '+(m.stroke?.color||'#111'),paintOrder:'stroke fill',transformOrigin:'center',whiteSpace:'pre'});
+  Object.assign(el.style,{display:'inline-block',position:'relative',fontFamily:alias(font),fontWeight:String(options.weight??role.weight??(isHero?(s.heroWeight||m.accentWeight||s.weight):(s.weight||m.weight||400))),color:options.color||role.color||(isHero?accent:color),fontStyle:isHero&&m.accentItalic?'italic':'normal',fontSize:(options.ratio??(isHero?s.activeScale??m.accentScale:1)??1)+'em',letterSpacing:(role.letterSpacingEm??(isHero?m.accentLetterSpacingEm:m.letterSpacingEm)??0)+'em',lineHeight:String(s.lineHeight||1.05),opacity:String(isHero?1:(m.restOpacity??1)),textTransform:role.transform||(isHero&&m.accentUppercase?'uppercase':m.transform||'none'),textShadow:shadow,WebkitTextStroke:(s.outline??(m.stroke?.px||0)*4)*unit+'px '+(s.outlineColor||m.stroke?.color||'#111'),paintOrder:'stroke fill',transformOrigin:'center',whiteSpace:'pre'});
   if((m.reveal||m.inception)&&!word.past&&!word.active)el.style.opacity='0';
   if(customWeight)el.style.fontWeight=String(s.weight);
   if(!s.uppercase&&m.transform==='uppercase')el.style.textTransform='none';
@@ -120,7 +123,7 @@ function decorateLook(container,cue,style,time,dimensions={}){
   const stack=m.stack||{},perRow=Math.max(1,Math.min(stack.maxPerRow||2,Math.ceil(shown.length/Math.max(1,stack.rowScale?.length||2))));
   for(let i=0,rowIndex=0;i<shown.length;i+=perRow,rowIndex++){
    const words=shown.slice(i,i+perRow),ratio=stack.rowScale?.[Math.min(rowIndex,stack.rowScale.length-1)]||1;
-   const line=row(words,ratio);for(let j=0;j<words.length;j++)if(shown.indexOf(words[j])===hero){const el=line.children[j],role=stack.roles?.pop;if(role){if(role.font)el.style.fontFamily=alias(role.font);if(role.color)el.style.color=role.color;if(role.weight)el.style.fontWeight=String(role.weight);if(role.transform)el.style.textTransform=role.transform;}if(m.accentFontVariants?.length)el.style.fontFamily=alias(m.accentFontVariants[hero%m.accentFontVariants.length]);el.style.fontSize=(m.accentScale||1)+'em';}
+   const line=row(words,ratio);for(let j=0;j<words.length;j++)if(shown.indexOf(words[j])===hero){const el=line.children[j],role=stack.roles?.pop;if(role){if(role.font)el.style.fontFamily=alias(role.font);if(role.color)el.style.color=role.color;if(role.weight)el.style.fontWeight=String(role.weight);if(role.transform)el.style.textTransform=role.transform;}if(m.accentFontVariants?.length)el.style.fontFamily=alias(m.accentFontVariants[hero%m.accentFontVariants.length]);el.style.fontSize=(s.activeScale??m.accentScale??1)+'em';}
   }
  }else if(family==='spatial'){
   const spatial=m.spatial||'red',layout=theme.layout||(spatial==='red'?'orbit':spatial==='yellow'?'pairs':'poster'),texture=theme.texture||(spatial==='red'?'extruded':'flat');
@@ -142,7 +145,7 @@ function decorateLook(container,cue,style,time,dimensions={}){
    group.appendChild(el);
   });
  }else{
-  const perRow=m.wordsPerLine||Math.ceil(shown.length/(m.wrapRows||1));
+  const perRow=s.wordsPerLine||m.wordsPerLine||Math.ceil(shown.length/(m.wrapRows||1));
   for(let i=0;i<shown.length;i+=perRow)row(shown.slice(i,i+perRow),1);
  }
  // Impact and echo are distinct layers above the support captions; their
@@ -151,7 +154,7 @@ function decorateLook(container,cue,style,time,dimensions={}){
   const index=detail.select==='leading'?0:detail.select==='trailing'?shown.length-1:hero,word=shown[index];
   if(word&&(!detail.maxChars||word.text.length<=detail.maxChars)){
    const el=node(word,true,index,{font:detail.font,ratio:1,weight:detail.weight||s.heroWeight,color:detail.color||accent});el.className='look-'+kind;
-   Object.assign(el.style,{position:'absolute',left:'50%',top:((detail.yPct??25)-(s.position??m.positionYPct??75))*height/100+'px',transform:'translate(-50%,-50%)',fontSize:(detail.sizePx||70)*referenceUnit+'px',fontFamily:alias(customFont?s.font:detail.font||s.heroFont),fontWeight:String(customWeight?s.weight:detail.weight||s.heroWeight||400),fontStyle:detail.italic?'italic':'normal',letterSpacing:(detail.letterSpacingEm||0)+'em',textTransform:detail.uppercase?'uppercase':'none',whiteSpace:'normal',width:((dimensions.width||height*9/16)*(detail.widthPct||92)/100)+'px',lineHeight:'.95',color:detail.color||accent,opacity:'1'});
+   Object.assign(el.style,{position:'absolute',left:'50%',top:((detail.yPct??25)-(m.positionYPct??75))*height/100+'px',transform:'translate(-50%,-50%)',fontSize:(detail.sizePx||70)*referenceUnit+'px',fontFamily:alias(customFont?s.font:detail.font||s.heroFont),fontWeight:String(customWeight?s.weight:detail.weight||s.heroWeight||400),fontStyle:detail.italic?'italic':'normal',letterSpacing:(detail.letterSpacingEm||0)+'em',textTransform:detail.uppercase?'uppercase':'none',whiteSpace:'normal',width:((dimensions.width||height*9/16)*(detail.widthPct||92)/100)+'px',lineHeight:'.95',color:detail.color||accent,opacity:'1'});
    if(detail.chip||detail.chipPad){const pad=detail.chipPad||{};Object.assign(el.style,{background:detail.chip?.bg||detail.litColor||accent,padding:`${pad.top||.05}em ${pad.right||.1}em ${pad.bottom||.05}em ${pad.left||.1}em`,borderRadius:(pad.radiusEm||.1)+'em',width:'auto',maxWidth:'100%'});}
    group.appendChild(el);
   }

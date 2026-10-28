@@ -26,3 +26,25 @@ test('personal key uses only OpenRouter with no redirects, no paid model and val
  await assert.rejects(ai.request('hooks',{cues:[]},'en',{mode:'hosted'}),/private/);
  await assert.rejects(ai.request('translate',{cues:[{id:'a',text:'Hello',start:0,end:1}]},'hi',{mode:'personal',key},async()=>Response.json({}, {status:401})),/rejected this API key/);
 });
+
+test('connection test reaches a free model without sending project content or returning secrets',async()=>{
+ let calls=0;const result=await ai.testConnection({mode:'personal',key},async(url,options)=>{
+  calls++;assert.equal(url,'https://openrouter.ai/api/v1/chat/completions');assert.equal(options.redirect,'error');
+  const body=JSON.parse(options.body);assert.equal(body.model,'openrouter/free');assert.equal(body.max_tokens,64);assert.deepEqual(body.provider.max_price,{prompt:0,completion:0});
+  assert.equal(body.messages[1].content,'Test the free text connection.');return Response.json({choices:[{message:{content:'```json\n{"ok":true}\n```'}}]});
+ });assert.equal(calls,1);assert.equal(result.ok,true);assert.equal(result.freeOnly,true);assert.ok(!JSON.stringify(result).includes(key));
+ await assert.rejects(ai.testConnection({mode:'personal'}),/Enter your OpenRouter key/);
+ await assert.rejects(ai.testConnection({mode:'hosted',key}),/publisher service is private/);
+ await assert.rejects(ai.testConnection({mode:'personal',key},async()=>Response.json({choices:[{message:{content:'{"ok":false}'}}]})),/test response was invalid/);
+});
+
+test('JSON-mode fallback remains free-only and distinguishes provider rejection from a network failure',async()=>{
+ const {completion}=await import('../services/captions/openrouter.mjs');let calls=0;
+ const result=await completion({OPENROUTER_API_KEY:key},[],async(url,options)=>{
+  const body=JSON.parse(options.body);calls++;assert.equal(body.model,'openrouter/free');assert.deepEqual(body.provider.max_price,{prompt:0,completion:0});
+  if(calls===1){assert.ok(body.response_format);return Response.json({error:{message:'Unsupported parameter'}},{status:400});}
+  assert.equal(body.response_format,undefined);return Response.json({choices:[{message:{content:'{"ok":true}'}}]});
+ });assert.equal(calls,2);assert.equal(result.ok,true);
+ await assert.rejects(completion({OPENROUTER_API_KEY:key},[],async()=>Response.json({}, {status:401})),/rejected this API key/);
+ await assert.rejects(completion({OPENROUTER_API_KEY:key},[],async()=>{throw new TypeError('fetch failed');}),/Cannot reach OpenRouter/);
+});

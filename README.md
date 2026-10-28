@@ -16,6 +16,8 @@ The latest source includes a caption chooser with **28 languages plus automatic 
 
 **Caption styles update (1.6.2):** Detailed layouts now retain paired fonts, impact layers, stack sizing and distinct motion. Seven actual open fonts replace generic substitutes, and row fades no longer hide captions. See [changes and verification](docs/CAPTION-STYLES-1.6.2.md).
 
+**Caption editing repair (1.6.3 source):** Live size/position controls, click-to-edit, preview dragging/resizing, readable phrase grouping and an actual AI connection test. Optional free OpenRouter audio has estimated timing and provider access requirements: the live account test was refused ($0.50 minimum balance for NVIDIA audio; approved-app restrictions for Inkling). See [repairs and provider evidence](docs/CAPTION-EDITING-1.6.3.md).
+
 **Reelish 1.6 source:** Adds video/image overlay tracks, direct resize/keyframes, speed/reverse/freeze, audio extraction, 112 licensed/original sounds, reviewed automatic sound placement, trim/fades, crop/RGB curves, 44 graphic designs, caption merge/motion controls and timeline zoom/snapping. See [verification and remaining gaps](docs/REELISH-1.6-STATUS.md). It is not a verified 100% Captik replica.
 
 **Personal AI keys (1.5.1 source):** Open **AI tools → AI connection & key** to save your own OpenRouter key securely and use free text AI directly. See the [personal AI guide](docs/PERSONAL-AI.md). The publisher service remains private; paid speech stays disabled.

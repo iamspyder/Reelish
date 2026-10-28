@@ -2,6 +2,7 @@
 // Values are expressed in Reelish's 1920px reference canvas, not Captik runtime code.
 (function(global){
 const base={font:'Inter',weight:800,size:78,color:'#ffffff',highlight:'#a0d83e',animation:'highlight',position:76,xPosition:50,bold:true,uppercase:false,box:false,shadow:true,outline:2,italic:false,letterSpacing:0,lineHeight:1.05,activeScale:1.12,activeBox:false,boxColor:'#111111',boxOpacity:.7,lines:2,wordsPerLine:4};
+base.captionPacing='readable';
 const specs=[
 ['captik_glow','Captik Glow','Dynamic',{animation:'glow',highlight:'#a0d83e',activeScale:1.55,uppercase:true}],
 ['ali_abdaal','Ali Abdaal','Clean',{font:'Poppins',weight:700,size:68,activeBox:true,boxColor:'#ffffff',highlight:'#111111',activeScale:1.05,outline:0}],

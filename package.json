@@ -1,10 +1,10 @@
 {
   "name": "reelish",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "main": "src/main.cjs",
   "scripts": {
     "start": "electron .",
-    "test": "node --test tests/core.test.cjs tests/caption-engine.test.cjs tests/fonts.test.cjs tests/presets.test.cjs tests/style-scenes.test.cjs tests/motion.test.cjs tests/audio-render.test.cjs tests/speech.test.cjs tests/local-media.test.cjs tests/online-speech.test.cjs tests/hinglish.test.cjs tests/openrouter-ai.test.cjs tests/layers.test.cjs tests/voiceover.test.cjs tests/ai-connection.test.cjs tests/clip-tools.test.cjs tests/media-layers.test.cjs tests/media-overlay-audio.test.cjs tests/caption-parity.test.cjs tests/color-tools.test.cjs tests/media-overlay-import.test.cjs tests/audio-tools.test.cjs tests/final-controls.test.cjs tests/graphic-families.test.cjs tests/caption-workflow.test.cjs",
+    "test": "node --test tests/core.test.cjs tests/caption-engine.test.cjs tests/fonts.test.cjs tests/presets.test.cjs tests/style-scenes.test.cjs tests/motion.test.cjs tests/audio-render.test.cjs tests/speech.test.cjs tests/local-media.test.cjs tests/online-speech.test.cjs tests/hinglish.test.cjs tests/openrouter-ai.test.cjs tests/layers.test.cjs tests/voiceover.test.cjs tests/ai-connection.test.cjs tests/clip-tools.test.cjs tests/media-layers.test.cjs tests/media-overlay-audio.test.cjs tests/caption-parity.test.cjs tests/color-tools.test.cjs tests/media-overlay-import.test.cjs tests/audio-tools.test.cjs tests/final-controls.test.cjs tests/graphic-families.test.cjs tests/caption-workflow.test.cjs tests/caption-reading.test.cjs tests/openrouter-audio.test.cjs",
     "test:desktop": "node tests/offline-desktop.cjs",
     "dist": "electron-builder --win nsis --x64",
     "test:media": "node tests/media.cjs",
