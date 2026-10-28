@@ -11,7 +11,7 @@ This release fixes caption editing and rapid grouping, adds a real OpenRouter co
 
 ## Downloads
 
-The Windows x64 installer and checksum are available with this release. Native macOS and Linux assets are uploaded separately after successful platform checks; download only files actually listed below.
+Windows x64, Apple Silicon, Intel Mac and Linux x64 packages are available below, each with a SHA-256 checksum. All four native builds passed their packaged captioning and MP4 export checks in [the verified build run](https://github.com/iamspyder/Reelish/actions/runs/40742414569).
 
 ## AI availability
 

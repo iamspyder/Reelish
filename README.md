@@ -50,18 +50,18 @@ Export **MP4 at 720p, 1080p or 4K**, in **9:16, 16:9, 1:1 or 4:5**. Save separat
 
 ## Download
 
-**Latest Windows version: 1.6.3.** The installer includes video tools, fonts and the optional local speech model/runtime. No separate Python or model installation is required.
+**Latest release: 1.6.3 — Windows, Apple Silicon, Intel Mac and Linux x64.** Packages include video tools, fonts and the optional local speech model/runtime. No separate Python or model installation is required.
 
 | Platform | Available download |
 | --- | --- |
 | Windows 10/11, x64 | **[Download Reelish 1.6.3 installer](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-Windows-x64-Setup.exe)** · [SHA-256](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-Windows-x64-Setup.exe.sha256) |
-| macOS, Apple Silicon | [Latest published platform files](https://github.com/iamspyder/Reelish/releases/latest) · [Previous verified 1.4.1 DMG](https://github.com/iamspyder/Reelish/releases/download/v1.4.1/Reelish-macOS-arm64.dmg) |
-| macOS, Intel | [Latest published platform files](https://github.com/iamspyder/Reelish/releases/latest) · [Previous verified 1.4.1 DMG](https://github.com/iamspyder/Reelish/releases/download/v1.4.1/Reelish-macOS-x64.dmg) |
-| Linux, x64 | [Latest published platform files](https://github.com/iamspyder/Reelish/releases/latest) · Previous verified 1.4.1: [AppImage](https://github.com/iamspyder/Reelish/releases/download/v1.4.1/Reelish-Linux-x86_64.AppImage) / [DEB](https://github.com/iamspyder/Reelish/releases/download/v1.4.1/Reelish-Linux-amd64.deb) |
+| macOS, Apple Silicon | [1.6.3 DMG](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-macOS-arm64.dmg) · [ZIP](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-macOS-arm64.zip) |
+| macOS, Intel | [1.6.3 DMG](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-macOS-x64.dmg) · [ZIP](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-macOS-x64.zip) |
+| Linux, x64 | [1.6.3 AppImage](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-Linux-x86_64.AppImage) · [DEB](https://github.com/iamspyder/Reelish/releases/download/v1.6.3/Reelish-Linux-amd64.deb) |
 
-macOS and Linux 1.6.3 packages are built and uploaded separately, only after platform checks pass. Use files actually listed on the release page; an older platform download is explicitly labelled above. [Check platform build status](https://github.com/iamspyder/Reelish/actions/workflows/release.yml).
+All four native platform builds passed packaged captioning and video export checks. [All release files and SHA-256 checksums](https://github.com/iamspyder/Reelish/releases/tag/v1.6.3) · [Verified build run](https://github.com/iamspyder/Reelish/actions/runs/40742414569).
 
-Windows: run the installer. macOS: open the DMG and drag Reelish into Applications. Linux: mark the AppImage executable, or install the DEB on a compatible distribution. Builds are not publisher-signed or Apple-notarized. Mobile, Windows ARM and Linux ARM packages are not provided.
+Windows: run the installer. macOS: open the DMG and drag Reelish into Applications. Linux: mark the AppImage executable, or install the DEB on a compatible distribution. AppImages may need your distribution's FUSE compatibility package. Builds are not publisher-signed or Apple-notarized. Mobile, Windows ARM and Linux ARM packages are not provided.
 
 ## From raw take to ready to post
 
