@@ -26,6 +26,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
     env:
+      ELECTRON_BUILDER_COMPRESSION_LEVEL: '1'
       CSC_IDENTITY_AUTO_DISCOVERY: 'false'
       GH_TOKEN: ${{ github.token }}
     steps:
